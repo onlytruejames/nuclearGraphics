@@ -1,0 +1,39 @@
+from PIL import Image
+from cv2 import VideoCapture, cvtColor, COLOR_BGR2RGB
+from random import randint
+
+global lastImg, velocity, decay
+
+velocity = (0, 0)
+decay = 0.9
+
+def variables(cam):
+    width, height = int(cam.get(3)), int(cam.get(4))
+    global lastImg
+    lastImg = Image.new("RGBA", (width, height))
+    transparent = Image.new("RGBA", (width, height))
+    return [width, height, transparent]
+
+def callback(cam, variables):
+    global lastImg, velocity, decay
+    result, image = cam.read()
+    width = variables[0]
+    height = variables[1]
+    transparent = variables[2]
+    if result:
+        image = cvtColor(image, COLOR_BGR2RGB)
+        image = Image.fromarray(image)
+        image = image.convert("RGBA")
+        transparent.paste(lastImg, box=velocity)
+        image = Image.blend(image, transparent, decay)
+        lastImg = image
+        velocity = (
+            velocity[0] + randint(-1, 1),
+            velocity[1] + randint(-1, 1)
+        )
+        decay += randint(-1, 1) / 10
+        if decay < 0:
+            decay = 0.2
+        if decay > 1:
+            decay = 0.9
+        return image
