@@ -1,7 +1,6 @@
 [
-    "ascii",
-    "blurDart",
-    "RGBSwapper",
-    "mirrorEcho",
-    "colourOffset"
+    {
+        "name": "ascii",
+        "gifAmount": 0.5
+    }
 ]

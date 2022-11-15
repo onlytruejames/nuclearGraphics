@@ -1,5 +1,4 @@
 from PIL import Image
-from cv2 import VideoCapture, cvtColor, COLOR_BGR2RGB
 from random import randint
 
 global rOffset, gOffset, bOffset
@@ -11,6 +10,10 @@ def variables(cam):
     width = int(cam.get(3))
     height = int(cam.get(4))
     baked = Image.new("RGB", (width, height))
+    global rOffset, gOffset, bOffset
+    rOffset = (5, 0)
+    gOffset = (0, 5)
+    bOffset = (0, 0)
     return [baked]
 
 def callback(cam, variables):
@@ -18,8 +21,6 @@ def callback(cam, variables):
     result, image = cam.read()
     baked = variables[0]
     if result:
-        image = cvtColor(image, COLOR_BGR2RGB)
-        image = Image.fromarray(image)
         image = image.split()
         r = baked.copy()
         r.paste(image[0], box=rOffset)

@@ -114,8 +114,6 @@ def callback(cam, variables):
     newWidth = variables[4]
     result, img = cam.read()
     if result:
-        #img = cvtColor(img, COLOR_BGR2RGB)
-        img = Image.fromarray(img)
         img = textfile_to_image(ImageToAscii(img).asciiImage)
         global iter
         iter += 1

@@ -1,6 +1,6 @@
 import json, tkinter, liveAscii, liveBlurDart, liveRGBSwapper, liveMirrorEcho, liveColourOffset
-from PIL import Image, ImageTk, ImageFont
-from cv2 import VideoCapture
+from PIL import Image, ImageTk
+from cv2 import VideoCapture, cvtColor, COLOR_BGR2RGB
 
 callbacks = {
     "ascii": liveAscii,
@@ -13,9 +13,41 @@ callbacks = {
 global currentCallback, clb
 clb = -1
 
+global currentFrame
+currentFrame = 0
+
 sequence = json.load(open("set.json", "r"))
 
 ASCII_CHARS = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", "."]
+
+class fakeCam:
+    def __init__(self, port):
+        self.cam = VideoCapture(port)
+    def get(self, x):
+        return self.cam.get(x)
+    def read(self):
+        global currentFrame, currentGif, frameNum
+        currentFrame += 1
+        try:
+            if currentFrame >= frameNum - 1:
+                currentFrame = 0
+            currentGif.seek(currentFrame)
+            frame = currentGif.copy().convert("RGB").resize((width, height))
+            if currentCallback["gifAmount"] == 1:
+                return True, frame
+            result, image = self.cam.read()
+            if not result:
+                return False, frame
+            image = cvtColor(image, COLOR_BGR2RGB)
+            image = Image.fromarray(image)
+            return True, Image.blend(image, frame, currentCallback["gifAmount"])
+        except:
+            result, image = self.cam.read()
+            if not result:
+                return False, None
+            image = cvtColor(image, COLOR_BGR2RGB)
+            image = Image.fromarray(image)
+            return True, image
 
 def list_ports():
     #stolen from stackoverflow
@@ -54,9 +86,10 @@ else:
             print("Invalid port")
 
 def callback(e):
+    root.bind("<Button-1>", nextCallback)
     nextCallback(e)
     while True:
-        img = callbacks[currentCallback].callback(cam, variables[currentCallback])
+        img = callbacks[currentCallback['name']].callback(cam, variables[currentCallback['name']])
         winWidth = root.winfo_width()
         winHeight = root.winfo_height()
         if winWidth / width > winHeight / height:
@@ -73,30 +106,61 @@ def callback(e):
         root.update()
 
 def changeCallback():
-    global currentCallback, clb, root
+    global currentCallback, clb, root, currentGif, currentFrame, frameNum
+    frameNum = frameNums[clb]
+    currentFrame = 0
+    currentGif = gifs[clb]
     currentCallback = sequence[clb]
-    root.title(f"live{currentCallback[0].upper()}{currentCallback[1:]}")
+    mode = currentCallback['name']
+    variables[mode] = callbacks[mode].variables(cam)
+    root.title(f"live{currentCallback['name'][0].upper()}{currentCallback['name'][1:]}")
 
 def nextCallback(e):
     global clb
     clb += 1
+    clb = clb % len(sequence)
     changeCallback()
 
 def prevCallback(e):
     global clb
+    if clb == 0:
+        clb = len(sequence)
     clb -= 1
     changeCallback()
 
 if type(port) == int:
-    global cam, root
-    cam = VideoCapture(0)
-    width = cam.get(3)
-    height = cam.get(4)
+    global cam, root, frames
+    cam = fakeCam(port)
+    width = int(cam.get(3))
+    height = int(cam.get(4))
 
     variables = {}
 
     for cb in callbacks.keys():
-        variables[cb] = callbacks[cb].variables(cam)
+        variables[cb] = []
+
+    gifs = []
+    frameNums = []
+
+    for event in range(len(sequence)):
+        try:
+            if sequence[event]["gifAmount"] > 0:
+                gifs.append(Image.open(f"gifs/{event}.gif"))
+                theGif = gifs[-0]
+                num = 0
+                while True:
+                    try:
+                        theGif.seek(num + 1)
+                        num += 1
+                    except:
+                        break
+                frameNums.append(num)
+            else:
+                gifs.append(False)
+                frameNums.append(1)
+        except:
+            gifs.append(False)
+            frameNums.append(1)
 
     root = tkinter.Tk()
 

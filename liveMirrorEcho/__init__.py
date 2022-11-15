@@ -12,17 +12,13 @@ def variables(cam):
     global lastImg
     lastImg = Image.new("RGBA", (width, height))
     transparent = Image.new("RGBA", (width, height))
-    return [width, height, transparent]
+    return [transparent]
 
 def callback(cam, variables):
     global lastImg, velocity, decay
     result, image = cam.read()
-    width = variables[0]
-    height = variables[1]
-    transparent = variables[2]
+    transparent = variables[0]
     if result:
-        image = cvtColor(image, COLOR_BGR2RGB)
-        image = Image.fromarray(image)
         image = image.convert("RGBA")
         transparent.paste(lastImg, box=velocity)
         image = Image.blend(image, transparent, decay)

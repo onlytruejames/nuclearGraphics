@@ -10,15 +10,11 @@ import tkinter
 halfPi = pi / 2
 
 def variables(cam):
-    return [int(cam.get(3)), int(cam.get(4))]
+    return []
 
 def callback(cam, variables):
     result, image = cam.read()
-    width = variables[0]
-    height = variables[1]
     if result:
-        image = cvtColor(image, COLOR_BGR2RGB)
-        image = Image.fromarray(image)
         image = list(image.split())
         shuffle(image)
         return Image.merge("RGB", tuple(image))

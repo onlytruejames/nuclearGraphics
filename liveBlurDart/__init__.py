@@ -1,10 +1,8 @@
 from random import randint
-from cv2 import VideoCapture, cvtColor, COLOR_BGR2RGB
 from PIL import (
     Image,
     ImageFilter
 )
-import tkinter, numpy
 
 global lastImg
 lastImg = Image.new("RGB", (200, 200))
@@ -18,8 +16,6 @@ def callback(cam, variables):
     div5size = variables[0]
     result, image = cam.read()
     if result:
-        image = cvtColor(image, COLOR_BGR2RGB)
-        image = Image.fromarray(image)
         width, height = div5size[0], div5size[1]
         # get a fifth of the image width and turn into coordinates of start and end points
         startCoords = (
