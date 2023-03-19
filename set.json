@@ -2,5 +2,38 @@
     {
         "name": "ascii",
         "gifAmount": 0.5
+    }, {
+        "name": "blurDart",
+        "gifAmount": 0.5
+    }, {
+        "name": "RGBSwapper",
+        "gifAmount": 0.5
+    }, {
+        "name": "mirrorEcho",
+        "gifAmount": 0.5
+    }, {
+        "name": "colourOffset",
+        "gifAmount": 0.5
+    }, {
+        "name": "imgFX",
+        "gifAmount": 0.5
+    }, {
+        "name": "flipDiff",
+        "gifAmount": 0.5
+    }, {
+        "name": "kaleidoscope",
+        "gifAmount": 0.5
+    }, {
+        "name": "reciprocal",
+        "gifAmount": 0.5
+    }, {
+        "name": "circle",
+        "gifAmount": 0.5
+    }, {
+        "name": "maximum",
+        "gifAmount": 0.5
+    }, {
+        "name": "oppDiff",
+        "gifAmount": 0.5
     }
 ]

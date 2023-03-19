@@ -1,4 +1,5 @@
-import json, tkinter, liveAscii, liveBlurDart, liveRGBSwapper, liveMirrorEcho, liveColourOffset
+import json, tkinter
+import liveAscii, liveBlurDart, liveRGBSwapper, liveMirrorEcho, liveColourOffset, liveImgFX, liveFlipDiff, liveKaleidoscope, liveReciprocal, liveCircle, liveMaximum, liveOppDiff
 from PIL import Image, ImageTk
 from cv2 import VideoCapture, cvtColor, COLOR_BGR2RGB
 
@@ -7,7 +8,14 @@ callbacks = {
     "blurDart": liveBlurDart,
     "RGBSwapper": liveRGBSwapper,
     "mirrorEcho": liveMirrorEcho,
-    "colourOffset": liveColourOffset
+    "colourOffset": liveColourOffset,
+    "imgFX": liveImgFX,
+    "flipDiff": liveFlipDiff,
+    "kaleidoscope": liveKaleidoscope,
+    "reciprocal": liveReciprocal,
+    "circle": liveCircle,
+    "maximum": liveMaximum,
+    "oppDiff": liveOppDiff
 }
 
 global currentCallback, clb
@@ -24,7 +32,7 @@ class fakeCam:
     def __init__(self, port):
         self.cam = VideoCapture(port)
     def get(self, x):
-        return self.cam.get(x)
+        return int(self.cam.get(x))
     def read(self):
         global currentFrame, currentGif, frameNum
         currentFrame += 1
