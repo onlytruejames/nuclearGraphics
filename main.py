@@ -97,21 +97,24 @@ def callback(e):
     root.bind("<Button-1>", nextCallback)
     nextCallback(e)
     while True:
-        img = callbacks[currentCallback['name']].callback(cam, variables[currentCallback['name']])
-        winWidth = root.winfo_width()
-        winHeight = root.winfo_height()
-        if winWidth / width > winHeight / height:
-            resize = winHeight / height
-        else:
-            resize = winWidth / width
-        img = img.resize((
-            int(width * resize),
-            int(height * resize)
-        ))
-        img = ImageTk.PhotoImage(img)
-        label.configure(image = img)
-        label.image = img
-        root.update()
+        try:
+            img = callbacks[currentCallback['name']].callback(cam, variables[currentCallback['name']])
+            winWidth = root.winfo_width()
+            winHeight = root.winfo_height()
+            if winWidth / width > winHeight / height:
+                resize = winHeight / height
+            else:
+                resize = winWidth / width
+            img = img.resize((
+                int(width * resize),
+                int(height * resize)
+            ))
+            img = ImageTk.PhotoImage(img)
+            label.configure(image = img)
+            label.image = img
+            root.update()
+        except:
+            assert True
 
 def changeCallback():
     global currentCallback, clb, root, currentGif, currentFrame, frameNum
