@@ -1,6 +1,6 @@
 # NuclearGraphics
 
-This is some live graphics software I made in tkinter, it started from trying to replicate the [Looking At Your Pager](https://www.youtube.com/watch?v=Z2IwAKmY774) visuals in Python. It went well so I made more, then a way to switch between them, and it's noteworthy enough to put on Github so here it is ig
+This is some live graphics software I made in tkinter, it started from trying to replicate the [Looking At Your Pager](https://www.youtube.com/watch?v=Z2IwAKmY774) visuals in Python. It went well so I made more, then a way to switch between them, and it's noteworthy enough to put on Github so here it is ig. I've also ~~plageurized~~ imitated effects from [live Aphex Twin graphics](https://www.youtube.com/watch?v=961uG4Ixg_Y) by [http://weirdcore.tv](Weirdcore), and I've [https://www.instagram.com/p/CqgMcw5ohTc/](used it in a live performance before).
 
 ## Premise
 
@@ -44,9 +44,18 @@ I think that just about does it
 ```json
 "ascii"
 "blurDart"
-"RGBSwapper"
-"mirrorEcho"
+"circle"
 "colourOffset"
+"flipDiff"
+"imgFX"
+"kaleidoscope"
+"maximum"
+"mirrorEcho"
+"oppDiff"
+"pixSort"
+"reciprocal"
+"RGBSwapper"
+"stretch"
 ```
 4. If you want to add Gifs to the effect, put them in `gifs` and name them `0.gif`, `1.gif`, etc, for as many effects as you need. If an effect doesn't need a Gif, don't add a gif for the effect and you can also remove `gifAmount` from the sequence.
 5. Done!

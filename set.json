@@ -35,5 +35,11 @@
     }, {
         "name": "oppDiff",
         "gifAmount": 0.5
+    }, {
+        "name": "pixSort",
+        "gifAmount": 0.5
+    }, {
+        "name": "stretch",
+        "gifAmount": 0.5
     }
 ]
