@@ -21,11 +21,11 @@ def callback(cam, variables):
     global lastImg
     result, img = cam.read()
     if result:
-        brightness = ImageStat.Stat(lastImg.convert("L")).mean[0]
+        brightness = abs(maths.cos(ImageStat.Stat(lastImg.convert("L")).mean[0] + randint(-2, 2))) * 255
         if maths.sin(brightness) >= 0:
             img = img.transpose(Image.ROTATE_90)
         img = np.array(img)
-        width = int((brightness / 255) * (len(img) / 1.5))
+        width = int((brightness / 255) * (len(img) / 2))
         for line in range(len(img)):
             img[line][0:width] = img[line][width]
             img[line][-width:-1] = img[line][-width]

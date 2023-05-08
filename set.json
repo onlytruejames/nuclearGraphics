@@ -41,5 +41,8 @@
     }, {
         "name": "stretch",
         "gifAmount": 0.5
+    }, {
+        "name": "faceOnly",
+        "gifAmount": 0.5
     }
 ]

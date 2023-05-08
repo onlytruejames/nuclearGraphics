@@ -1,5 +1,5 @@
 import json, tkinter
-import liveAscii, liveBlurDart, liveRGBSwapper, liveMirrorEcho, liveColourOffset, liveImgFX, liveFlipDiff, liveKaleidoscope, liveReciprocal, liveCircle, liveMaximum, liveOppDiff, livePixSort, liveStretch
+import liveAscii, liveBlurDart, liveRGBSwapper, liveMirrorEcho, liveColourOffset, liveImgFX, liveFlipDiff, liveKaleidoscope, liveReciprocal, liveCircle, liveMaximum, liveOppDiff, livePixSort, liveStretch, liveFaceOnly
 from PIL import Image, ImageTk
 from cv2 import VideoCapture, cvtColor, COLOR_BGR2RGB
 
@@ -17,7 +17,8 @@ callbacks = {
     "maximum": liveMaximum,
     "oppDiff": liveOppDiff,
     "pixSort": livePixSort,
-    "stretch": liveStretch
+    "stretch": liveStretch,
+    "faceOnly": liveFaceOnly
 }
 
 global currentCallback, clb
@@ -116,6 +117,7 @@ def callback(e):
             label.image = img
             root.update()
         except Exception as e:
+            root.quit()
             raise e
 
 def changeCallback():
