@@ -2,7 +2,7 @@
 
 ![funni logo](https://raw.githubusercontent.com/onlytruejames/nuclearGraphics/main/nuclearGraphics.png)
 
-This is some live graphics software I made in tkinter. It started from trying to replicate the [Looking At Your Pager](https://www.youtube.com/watch?v=Z2IwAKmY774) visuals in Python, it went well so I made more, then a way to switch between them. I also ~~plageurized~~ imitated effects from [live Aphex Twin graphics](https://www.youtube.com/watch?v=961uG4Ixg_Y) by [Weirdcore](http://weirdcore.tvWeirdcore), and I've [used it in a live performance before](https://www.instagram.com/p/CqgMcw5ohTc/). So here the code is for people to use if they are ~~deranged that they'd try and use this~~ so inclined.
+This is some live graphics software I made in tkinter. It started from trying to replicate the [Looking At Your Pager](https://www.youtube.com/watch?v=Z2IwAKmY774) visuals in Python, it went well so I made more, then a way to switch between them. I also ~~plageurized~~ imitated effects from [live Aphex Twin graphics](https://www.youtube.com/watch?v=961uG4Ixg_Y) by [Weirdcore](http://weirdcore.tv), and I've [used it in a live performance before](https://www.instagram.com/p/CqgMcw5ohTc/). So here the code is for people to use if they are ~~deranged that they'd try and use this~~ so inclined.
 
 ## Premise
 
