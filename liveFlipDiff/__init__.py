@@ -18,14 +18,12 @@ def variables(cam):
     lastImg = Image.new("RGB", (int(cam.get(3)), int(cam.get(4))))
     return [lastImg]
 
-def callback(cam, variables):
+def callback(image, variables):
     global lastImg
-    result, image = cam.read()
-    if result:
-        img = choice(effects)(np.asarray(image), np.asarray(lastImg))
-        lastImg = Image.blend(image, lastImg, 0.5)
-        if randint(0, 1) == 0:
-            lastImg = ImageOps.mirror(lastImg)
-        else:
-            lastImg = ImageOps.flip(lastImg)
-        return img
+    img = choice(effects)(np.asarray(image), np.asarray(lastImg))
+    lastImg = Image.blend(image, lastImg, 0.5)
+    if randint(0, 1) == 0:
+        lastImg = ImageOps.mirror(lastImg)
+    else:
+        lastImg = ImageOps.flip(lastImg)
+    return img

@@ -38,15 +38,13 @@ def variables(cam):
     lastImg = Image.new("RGB", (cam.get(3), cam.get(4)))
     return []
 
-def callback(cam, variables):
+def callback(image, variables):
     global lastImg
-    result, image = cam.read()
-    if result:
-        image = image.convert("RGB")
-        flip = ImageOps.flip(image)
-        mirror = ImageOps.mirror(image)
-        both = ImageOps.flip(mirror)
-        img = Image.blend(Image.blend(image, flip, 0.5), Image.blend(mirror, both, 0.5), 0.5)
-        img = Image.blend(img, resize(img, lastImg), 0.5)
-        lastImg = img.rotate(randint(0, 360), fillcolor=(0, 0, 0, 0))
-        return img
+    image = image.convert("RGB")
+    flip = ImageOps.flip(image)
+    mirror = ImageOps.mirror(image)
+    both = ImageOps.flip(mirror)
+    img = Image.blend(Image.blend(image, flip, 0.5), Image.blend(mirror, both, 0.5), 0.5)
+    img = Image.blend(img, resize(img, lastImg), 0.5)
+    lastImg = img.rotate(randint(0, 360), fillcolor=(0, 0, 0, 0))
+    return img

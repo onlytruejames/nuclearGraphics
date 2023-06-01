@@ -1,6 +1,6 @@
 import json, tkinter
-import liveAscii, liveBlurDart, liveRGBSwapper, liveMirrorEcho, liveColourOffset, liveImgFX, liveFlipDiff, liveKaleidoscope, liveReciprocal, liveCircle, liveMaximum, liveOppDiff, livePixSort, liveStretch, liveFaceOnly
-from PIL import Image, ImageTk
+import liveAscii, liveBlurDart, liveRGBSwapper, liveMirrorEcho, liveColourOffset, liveImgFX, liveFlipDiff, liveKaleidoscope, liveReciprocal, liveCircle, liveMaximum, liveOppDiff, livePixSort, liveStretch, liveFaceOnly, liveDissolve
+from PIL import Image, ImageTk, ImageFilter
 from cv2 import VideoCapture, cvtColor, COLOR_BGR2RGB
 
 callbacks = {
@@ -18,7 +18,8 @@ callbacks = {
     "oppDiff": liveOppDiff,
     "pixSort": livePixSort,
     "stretch": liveStretch,
-    "faceOnly": liveFaceOnly
+    "faceOnly": liveFaceOnly,
+    "dissolve": liveDissolve
 }
 
 global currentCallback, clb
@@ -101,21 +102,24 @@ def callback(e):
     nextCallback(e)
     while True:
         try:
-            img = callbacks[currentCallback['name']].callback(cam, variables[currentCallback['name']])
-            winWidth = root.winfo_width()
-            winHeight = root.winfo_height()
-            if winWidth / width > winHeight / height:
-                resize = winHeight / height
-            else:
-                resize = winWidth / width
-            img = img.resize((
-                int(width * resize),
-                int(height * resize)
-            ))
-            img = ImageTk.PhotoImage(img)
-            label.configure(image = img)
-            label.image = img
-            root.update()
+            result, image = cam.read()
+            if result:
+                for cb in currentCallback['names']:
+                    image = callbacks[cb].callback(image, variables[cb])
+                winWidth = root.winfo_width()
+                winHeight = root.winfo_height()
+                if winWidth / width > winHeight / height:
+                    resize = winHeight / height
+                else:
+                    resize = winWidth / width
+                img = image.resize((
+                    int(width * resize),
+                    int(height * resize)
+                ))
+                img = ImageTk.PhotoImage(img)
+                label.configure(image = img)
+                label.image = img
+                root.update()
         except Exception as e:
             root.quit()
             raise e
@@ -126,9 +130,10 @@ def changeCallback():
     currentFrame = 0
     currentGif = gifs[clb]
     currentCallback = sequence[clb]
-    mode = currentCallback['name']
-    variables[mode] = callbacks[mode].variables(cam)
-    root.title(f"live{currentCallback['name'][0].upper()}{currentCallback['name'][1:]}")
+    modes = currentCallback['names']
+    for mode in modes:
+        variables[mode] = callbacks[mode].variables(cam)
+    #root.title(f"live{currentCallback['names'][0].upper()}{currentCallback['names'][1:]}")
 
 def nextCallback(e):
     global clb
@@ -182,7 +187,7 @@ if type(port) == int:
     root.geometry("750x600")
     root.title("NuclearGraphics")
 
-    img1 = ImageTk.PhotoImage(Image.new("RGB", (200, 200)))
+    img1 = ImageTk.PhotoImage(Image.open("nuclearGraphics.png"))
 
     label = tkinter.Label(root, image = img1, borderwidth=0, highlightthickness=0)
     label.pack()

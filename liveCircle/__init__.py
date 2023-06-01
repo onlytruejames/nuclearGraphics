@@ -56,15 +56,13 @@ def variables(cam):
     lastImg = Image.new("RGB", (int(cam.get(3)), int(cam.get(4))))
     return [lastImg]
 
-def callback(cam, variables):
+def callback(img, variables):
     global lastImg, rings
-    result, image = cam.read()
-    if result:
-        img = (choice(rings) * np.asarray(image))
-        img = img.astype(np.uint16)
-        img = np.clip(img, 0, 255)
-        img = img.astype(np.uint8)
-        img = Image.fromarray(img)
-        img = Image.blend(img, resize(img, lastImg), 0.5)
-        lastImg = img.rotate(randint(0, 360), fillcolor=(0, 0, 0, 0))
-        return img
+    img = (choice(rings) * np.asarray(img))
+    img = img.astype(np.uint16)
+    img = np.clip(img, 0, 255)
+    img = img.astype(np.uint8)
+    img = Image.fromarray(img)
+    img = Image.blend(img, resize(img, lastImg), 0.5)
+    lastImg = img.rotate(randint(0, 360), fillcolor=(0, 0, 0, 0))
+    return img

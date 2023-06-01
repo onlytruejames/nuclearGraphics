@@ -19,37 +19,34 @@ def variables(cam):
     direction = [1, 1]
     return []
 
-def callback(cam, variables):
-    result, image = cam.read()
+def callback(image, variables):
     global lastImg, direction
-    if result:
+    direction = [
+        direction[0] / maths.sqrt(direction[0] ** 2 + direction[1] ** 2),
+        direction[1] / maths.sqrt(direction[0] ** 2 + direction[1] ** 2)
+    ]
+    lastImg = np.array(lastImg)
+    lastImg = np.roll(lastImg, (
+        int(direction[0] * 30),
+        int(direction[1] * 30)
+    ), axis = (0, 1))
+    lastImg = Image.fromarray(lastImg)
+    open_cv_image = np.array(image) 
+    open_cv_image = open_cv_image[:, :, ::-1].copy()
+    no_of_faces, faceCoors = fl.faces_locations(open_cv_image)
+    try:
+        num = random.randint(0, no_of_faces - 1)
+        face = Image.fromarray(fl.get_faces(open_cv_image)[num])
         direction = [
-            direction[0] / maths.sqrt(direction[0] ** 2 + direction[1] ** 2),
-            direction[1] / maths.sqrt(direction[0] ** 2 + direction[1] ** 2)
+            -(((faceCoors[num][1] * 2 + faceCoors[num][3]) - image.height) / 2) / image.height,
+            (((faceCoors[num][0] * 2 + faceCoors[num][2]) - image.width) / 2) / image.width
         ]
-        lastImg = np.array(lastImg)
-        lastImg = np.roll(lastImg, (
-            int(direction[0] * 30),
-            int(direction[1] * 30)
-        ), axis = (0, 1))
-        lastImg = Image.fromarray(lastImg)
-        open_cv_image = np.array(image) 
-        open_cv_image = open_cv_image[:, :, ::-1].copy()
-        no_of_faces, faceCoors = fl.faces_locations(open_cv_image)
-        try:
-            num = random.randint(0, no_of_faces - 1)
-            face = Image.fromarray(fl.get_faces(open_cv_image)[num])
-            direction = [
-                -(((faceCoors[num][1] * 2 + faceCoors[num][3]) - image.height) / 2) / image.height,
-                (((faceCoors[num][0] * 2 + faceCoors[num][2]) - image.width) / 2) / image.width
-            ]
-            print(direction)
-            lastImg.paste(face, (
-                int((lastImg.width / 2) - (face.width / 2)),
-                int((lastImg.height / 2) - (face.height / 2)),
-                int((lastImg.width / 2) + (face.width / 2)),
-                int((lastImg.height / 2) + (face.height / 2)) 
-            ))
-        except Exception as e:
-            pass
-        return lastImg
+        lastImg.paste(face, (
+            int((lastImg.width / 2) - (face.width / 2)),
+            int((lastImg.height / 2) - (face.height / 2)),
+            int((lastImg.width / 2) + (face.width / 2)),
+            int((lastImg.height / 2) + (face.height / 2)) 
+        ))
+    except Exception as e:
+        pass
+    return lastImg

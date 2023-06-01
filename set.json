@@ -1,48 +1,83 @@
 [
     {
-        "name": "ascii",
-        "gifAmount": 0.5
+        "names": [
+            "ascii"
+    ],
+        "gifAmount": 1
     }, {
-        "name": "blurDart",
-        "gifAmount": 0.5
+        "names": [
+            "blurDart"
+    ],
+        "gifAmount": 1
     }, {
-        "name": "RGBSwapper",
-        "gifAmount": 0.5
+        "names": [
+            "RGBSwapper"
+    ],
+        "gifAmount": 1
     }, {
-        "name": "mirrorEcho",
-        "gifAmount": 0.5
+        "names": [
+            "mirrorEcho"
+    ],
+        "gifAmount": 1
     }, {
-        "name": "colourOffset",
-        "gifAmount": 0.5
+        "names": [
+            "colourOffset"
+    ],
+        "gifAmount": 1
     }, {
-        "name": "imgFX",
-        "gifAmount": 0.5
+        "names": [
+            "imgFX"
+    ],
+        "gifAmount": 1
     }, {
-        "name": "flipDiff",
-        "gifAmount": 0.5
+        "names": [
+            "flipDiff"
+    ],
+        "gifAmount": 1
     }, {
-        "name": "kaleidoscope",
-        "gifAmount": 0.5
+        "names": [
+            "kaleidoscope"
+    ],
+        "gifAmount": 1
     }, {
-        "name": "reciprocal",
-        "gifAmount": 0.5
+        "names": [
+            "reciprocal"
+    ],
+        "gifAmount": 1
     }, {
-        "name": "circle",
-        "gifAmount": 0.5
+        "names": [
+            "circle"
+    ],
+        "gifAmount": 1
     }, {
-        "name": "maximum",
-        "gifAmount": 0.5
+        "names": [
+            "maximum"
+    ],
+        "gifAmount": 1
     }, {
-        "name": "oppDiff",
-        "gifAmount": 0.5
+        "names": [
+            "oppDiff"
+    ],
+        "gifAmount": 1
     }, {
-        "name": "pixSort",
-        "gifAmount": 0.5
+        "names": [
+            "pixSort"
+    ],
+        "gifAmount": 1
     }, {
-        "name": "stretch",
-        "gifAmount": 0.5
+        "names": [
+            "stretch"
+    ],
+        "gifAmount": 1
     }, {
-        "name": "faceOnly",
-        "gifAmount": 0.5
+        "names": [
+            "faceOnly"
+    ],
+        "gifAmount": 1
+    }, {
+        "names": [
+            "dissolve"
+    ],
+        "gifAmount": 1
     }
 ]

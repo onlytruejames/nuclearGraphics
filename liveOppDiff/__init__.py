@@ -11,11 +11,9 @@ def variables(cam):
     lastImg = np.asarray(Image.new("RGB", (cam.get(3), cam.get(4))))
     return []
 
-def callback(cam, variables):
+def callback(image, variables):
     global lastImg
-    result, image = cam.read()
-    if result:
-        img = lastImg + (lastImg - np.asarray(image))
-        lastImg = image
-        img = Image.fromarray(img)
-        return img
+    img = lastImg + (lastImg - np.asarray(image))
+    lastImg = image
+    img = Image.fromarray(img)
+    return img

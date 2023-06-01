@@ -14,22 +14,20 @@ def variables(cam):
     transparent = Image.new("RGBA", (width, height))
     return [transparent]
 
-def callback(cam, variables):
+def callback(image, variables):
     global lastImg, velocity, decay
-    result, image = cam.read()
     transparent = variables[0]
-    if result:
-        image = image.convert("RGBA")
-        transparent.paste(lastImg, box=velocity)
-        image = Image.blend(image, transparent, decay)
-        lastImg = image
-        velocity = (
-            velocity[0] + randint(-1, 1),
-            velocity[1] + randint(-1, 1)
-        )
-        decay += randint(-1, 1) / 10
-        if decay < 0:
-            decay = 0.2
-        if decay > 1:
-            decay = 0.9
-        return image
+    image = image.convert("RGBA")
+    transparent.paste(lastImg, box=velocity)
+    image = Image.blend(image, transparent, decay)
+    lastImg = image
+    velocity = (
+        velocity[0] + randint(-1, 1),
+        velocity[1] + randint(-1, 1)
+    )
+    decay += randint(-1, 1) / 10
+    if decay < 0:
+        decay = 0.2
+    if decay > 1:
+        decay = 0.9
+    return image

@@ -25,27 +25,25 @@ def variables(cam):
     lastImg = Image.new("RGB", (cam.get(3), cam.get(4)))
     return []
 
-def callback(cam, variables):
+def callback(image, variables):
     global lastImg, frame
-    result, image = cam.read()
-    if result:
-        image = Image.blend(image, lastImg, 0.5)
-        match frame % 4:
-            case 1:
-                image = image.transpose(Image.ROTATE_90)
-            case 2:
-                image = image.transpose(Image.ROTATE_180)
-            case 3:
-                image = image.transpose(Image.ROTATE_270)
-        img = sorts(np.array(image),)
-        img = Image.fromarray(img)
-        match frame % 4:
-            case 1:
-                img = img.transpose(Image.ROTATE_270)
-            case 2:
-                img = img.transpose(Image.ROTATE_180)
-            case 3:
-                img = img.transpose(Image.ROTATE_90)
-        lastImg = img
-        frame += 1
-        return img
+    image = Image.blend(image, lastImg, 0.5)
+    match frame % 4:
+        case 1:
+            image = image.transpose(Image.ROTATE_90)
+        case 2:
+            image = image.transpose(Image.ROTATE_180)
+        case 3:
+            image = image.transpose(Image.ROTATE_270)
+    img = sorts(np.array(image),)
+    img = Image.fromarray(img)
+    match frame % 4:
+        case 1:
+            img = img.transpose(Image.ROTATE_270)
+        case 2:
+            img = img.transpose(Image.ROTATE_180)
+        case 3:
+            img = img.transpose(Image.ROTATE_90)
+    lastImg = img
+    frame += 1
+    return img

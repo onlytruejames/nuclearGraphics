@@ -105,16 +105,14 @@ def textfile_to_image(lines):
 
     return image
 
-def callback(cam, variables):
+def callback(img, variables):
     global font, imageHeight, imageWidth, newHeight, newWidth
     font = variables[0]
     imageHeight = variables[1]
     imageWidth = variables[2]
     newHeight = variables[3]
     newWidth = variables[4]
-    result, img = cam.read()
-    if result:
-        img = textfile_to_image(ImageToAscii(img).asciiImage)
-        global iter
-        iter += 1
-        return img
+    img = textfile_to_image(ImageToAscii(img).asciiImage)
+    global iter
+    iter += 1
+    return img

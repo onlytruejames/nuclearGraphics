@@ -12,12 +12,10 @@ halfPi = pi / 2
 def variables(cam):
     return []
 
-def callback(cam, variables):
-    result, image = cam.read()
-    if result:
-        image = list(image.split())
-        shuffle(image)
-        return Image.merge("RGB", tuple(image))
+def callback(image, variables):
+    image = list(image.split())
+    shuffle(image)
+    return Image.merge("RGB", tuple(image))
 
 size = 99
 
