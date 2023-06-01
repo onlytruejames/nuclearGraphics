@@ -33,16 +33,19 @@ I think that just about does it
 ## Programming in a sequence
 
 1. Open `set.json`
-2. There should be one effect in there already. The file will look like this:
+2. All the effects are already there. For each effect, it currently looks like this:
 ```json
 [
     {
-        "name": "ascii",
+        "names": [
+            "ascii"
+        ],
         "gifAmount": 0.5
     }
 ]
 ```
-3. Basically copy this over and over again in the list with different effects and Gif amounts, which are a value from 0 to 1 representing how much of the input video is from the Gif. The included effects are below, but you can use more if you add them
+3. Basically copy this over and over again in the list with different effects and Gif amounts, which are a value from 0 to 1 representing how much of the input video is from the Gif. The included effects are below, but you can use more if you add them. Effects can also be stacked and are executed in the order they appear in the `names` list.
+
 ```json
 "ascii"
 "blurDart"
@@ -84,11 +87,9 @@ from PIL import (
 def variables(cam):
     return [] #fill this list with the variables you need, although frankly it can be any data type as long as it's only one variable
 
-def callback(cam, variables):
+def callback(img, variables):
     #get your variables here with variables[0] or whatever
-    result, image = cam.read()
-    if result:
-        #image is a PIL image which you can manipulate. Once manipulated, return the image.
+    #manipulate img and return it
 
 ```
 
