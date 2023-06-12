@@ -13,7 +13,7 @@ COMMON_MONO_FONTFILENAMES = [
     'Consola.ttf'
 ]
 
-def variables(cam):
+def variables(cam, clb):
     font = None
     for fontFilename in COMMON_MONO_FONTFILENAMES:
         try:
@@ -60,7 +60,7 @@ iter = 0
 
 halfPi = pi / 2
 
-size = 1000
+size = 250
 
 def calc(x):
     x = x % size
@@ -82,7 +82,7 @@ def calc(x):
         int(b * 255 + 0.5)
     )
 
-colours = [calc(x) for x in range(1000)]
+colours = [calc(x) for x in range(size)]
 
 def textfile_to_image(lines):
     # stolen from stackoverflow
@@ -91,13 +91,13 @@ def textfile_to_image(lines):
     # draw the background
 
     global iter
-    backgroundColour = colours[iter % 1000]
+    backgroundColour = colours[iter % size]
 
     image = Image.new("RGB", (imageWidth, imageHeight), color=backgroundColour)
     draw = ImageDraw.Draw(image)
 
     # draw each line of text
-    fontColour = calc((iter + 500) % 1000)
+    fontColour = calc((iter + size / 2) % size)
 
     for i, line in enumerate(lines):
         vertical_position = int(round(i * 17))

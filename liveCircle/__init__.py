@@ -36,7 +36,7 @@ def resize(img, lastImg):
     bottom = (height + h) / 2
     return lastImg.crop((left, top, right, bottom))
 
-def variables(cam):
+def variables(cam, clb):
     global lastImg, rings
     width = cam.get(3)
     height = cam.get(4)

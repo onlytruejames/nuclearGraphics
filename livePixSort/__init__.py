@@ -20,7 +20,7 @@ def sorts(img):
         ) % 255]))
     return img
 
-def variables(cam):
+def variables(cam, clb):
     global lastImg
     lastImg = Image.new("RGB", (cam.get(3), cam.get(4)))
     return []

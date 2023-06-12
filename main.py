@@ -1,7 +1,8 @@
 import json, tkinter
-import liveAscii, liveBlurDart, liveRGBSwapper, liveMirrorEcho, liveColourOffset, liveImgFX, liveFlipDiff, liveKaleidoscope, liveReciprocal, liveCircle, liveMaximum, liveOppDiff, livePixSort, liveStretch, liveFaceOnly, liveDissolve
-from PIL import Image, ImageTk, ImageFilter
+import liveAscii, liveBlurDart, liveRGBSwapper, liveMirrorEcho, liveColourOffset, liveImgFX, liveFlipDiff, liveKaleidoscope, liveReciprocal, liveCircle, liveMaximum, liveOppDiff, livePixSort, liveStretch, liveFaceOnly, liveDissolve, liveKuwahara, livePalette, liveDog
+from PIL import Image, ImageTk
 from cv2 import VideoCapture, cvtColor, COLOR_BGR2RGB
+import mido, rtmidi
 
 callbacks = {
     "ascii": liveAscii,
@@ -19,16 +20,50 @@ callbacks = {
     "pixSort": livePixSort,
     "stretch": liveStretch,
     "faceOnly": liveFaceOnly,
-    "dissolve": liveDissolve
+    "dissolve": liveDissolve,
+    "kuwahara": liveKuwahara,
+    "palette": livePalette,
+    "dog": liveDog
 }
 
-global currentCallback, clb
+global currentCallback, clb, currentFrame
 clb = -1
-
-global currentFrame
 currentFrame = 0
 
-sequence = json.load(open("set.json", "r"))
+set = json.load(open("set.json", "r"))
+isMidi = set["midi"]
+if isMidi:
+    i = 0
+    done = False
+    midiPorts = []
+    try:
+        x = rtmidi.MidiIn(0)
+    except:
+        pass
+    x = rtmidi.MidiIn(0)
+    while not done:
+        try:
+            midiPorts.append(x.get_port_name(i))
+            i += 1
+        except:
+            done = True
+    done = False
+    if len(midiPorts) > 1:
+        while not done:
+            midiPort = int(input(f"Choose a midi port from this list. Give the index:\n{midiPorts}"))
+            if 0 <= midiPort < len(midiPorts):
+                done = True
+            else:
+                print("Invalid port")
+    elif len(midiPorts) == 1:
+        midiPort = 0
+    else:
+        print("MIDI is unavailable, please plug a controller in or create a virtual input.")
+        isMidi = False
+    if isMidi:
+        midiIn = mido.open_input(midiPorts[midiPort])
+midiOn = False
+sequence = set["sequence"]
 
 ASCII_CHARS = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", "."]
 
@@ -101,6 +136,10 @@ def callback(e):
     root.bind("<Button-1>", nextCallback)
     nextCallback(e)
     while True:
+        msg = midiIn.poll()
+        if msg:
+            if msg.type == "note_on":
+                nextCallback(e)
         try:
             result, image = cam.read()
             if result:
@@ -132,7 +171,7 @@ def changeCallback():
     currentCallback = sequence[clb]
     modes = currentCallback['names']
     for mode in modes:
-        variables[mode] = callbacks[mode].variables(cam)
+        variables[mode] = callbacks[mode].variables(cam, clb)
     #root.title(f"live{currentCallback['names'][0].upper()}{currentCallback['names'][1:]}")
 
 def nextCallback(e):

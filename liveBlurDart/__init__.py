@@ -9,7 +9,7 @@ lastImg = Image.new("RGB", (200, 200))
 gaussian = ImageFilter.GaussianBlur(radius = 10)
 unsharp = ImageFilter.UnsharpMask(radius = 10, percent = 1000)
 
-def variables(cam):
+def variables(cam, clb):
     global div5size
     div5size = (int(cam.get(3) / 5), int(cam.get(4) / 5))
     return []

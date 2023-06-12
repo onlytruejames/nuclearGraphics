@@ -13,7 +13,7 @@ def difference(img, lastImg):
 
 effects = [difference]
 
-def variables(cam):
+def variables(cam, clb):
     global lastImg
     lastImg = Image.new("RGB", (int(cam.get(3)), int(cam.get(4))))
     return [lastImg]

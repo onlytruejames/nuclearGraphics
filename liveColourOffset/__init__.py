@@ -6,7 +6,7 @@ rOffset = (5, 0)
 gOffset = (0, 5)
 bOffset = (0, 0)
 
-def variables(cam):
+def variables(cam, clb):
     width = int(cam.get(3))
     height = int(cam.get(4))
     baked = Image.new("RGB", (width, height))

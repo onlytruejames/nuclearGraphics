@@ -49,7 +49,7 @@ def difference(img, lastImg):
 
 effects = [addtract, subadd, invert1, invert2, rain2bow, difference]
 
-def variables(cam):
+def variables(cam, clb):
     global lastImg
     lastImg = np.asarray(Image.new("RGB", (int(cam.get(3)), int(cam.get(4)))))
     return [lastImg]

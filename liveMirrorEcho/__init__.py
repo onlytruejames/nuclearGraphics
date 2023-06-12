@@ -7,7 +7,7 @@ global lastImg, velocity, decay
 velocity = (0, 0)
 decay = 0.9
 
-def variables(cam):
+def variables(cam, clb):
     width, height = int(cam.get(3)), int(cam.get(4))
     global lastImg
     lastImg = Image.new("RGBA", (width, height))

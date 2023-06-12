@@ -9,7 +9,7 @@ import tkinter
 
 halfPi = pi / 2
 
-def variables(cam):
+def variables(cam, clb):
     return []
 
 def callback(image, variables):

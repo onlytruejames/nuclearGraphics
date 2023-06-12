@@ -6,7 +6,7 @@ This is some live graphics software I made in tkinter. It started from trying to
 
 ## Premise
 
-Essentially it takes a webcam image, then turns it from OpenCV to Pillow, combines it with a GIF if you want, passes it through a filter, then puts it on a Tkinter window.
+Essentially it takes a webcam image, then turns it from OpenCV to Pillow, combines it with a GIF if you want, passes it through filters, then puts it on a Tkinter window. If you want the effect to be automatically changed by a DAW, send ANY keypress to MIDI through port 0. I might create virtual inputs in the future, it's not hard to do.
 
 ## More detailed flow of the program
 
@@ -61,9 +61,14 @@ I think that just about does it
 "reciprocal"
 "RGBSwapper"
 "stretch"
+"kuwahara"
+"palette"
+"dog"
 ```
 4. If you want to add Gifs to the effect, put them in `gifs` and name them `0.gif`, `1.gif`, etc, for as many effects as you need. If an effect doesn't need a Gif, don't add a gif for the effect and you can also remove `gifAmount` from the sequence.
 5. Done!
+
+Also some of the effects have their own sets, but the documentation should be there instead (when I get round to it).
 
 ## Adding custom effects
 
@@ -84,7 +89,7 @@ from PIL import (
 
 #constant variables here
 
-def variables(cam):
+def variables(cam, clb):
     return [] #fill this list with the variables you need, although frankly it can be any data type as long as it's only one variable
 
 def callback(img, variables):

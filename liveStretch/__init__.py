@@ -6,7 +6,7 @@ from random import choice, randint
 global lastImg
 lastImg = Image.new("RGB", (200, 200))
 
-def variables(cam):
+def variables(cam, clb):
     global lastImg
     lastImg = Image.new("RGB", (cam.get(3), cam.get(4)))
     return []

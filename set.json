@@ -1,83 +1,107 @@
-[
-    {
-        "names": [
-            "ascii"
-    ],
-        "gifAmount": 1
-    }, {
-        "names": [
-            "blurDart"
-    ],
-        "gifAmount": 1
-    }, {
-        "names": [
-            "RGBSwapper"
-    ],
-        "gifAmount": 1
-    }, {
-        "names": [
-            "mirrorEcho"
-    ],
-        "gifAmount": 1
-    }, {
-        "names": [
-            "colourOffset"
-    ],
-        "gifAmount": 1
-    }, {
-        "names": [
-            "imgFX"
-    ],
-        "gifAmount": 1
-    }, {
-        "names": [
-            "flipDiff"
-    ],
-        "gifAmount": 1
-    }, {
-        "names": [
-            "kaleidoscope"
-    ],
-        "gifAmount": 1
-    }, {
-        "names": [
-            "reciprocal"
-    ],
-        "gifAmount": 1
-    }, {
-        "names": [
-            "circle"
-    ],
-        "gifAmount": 1
-    }, {
-        "names": [
-            "maximum"
-    ],
-        "gifAmount": 1
-    }, {
-        "names": [
-            "oppDiff"
-    ],
-        "gifAmount": 1
-    }, {
-        "names": [
-            "pixSort"
-    ],
-        "gifAmount": 1
-    }, {
-        "names": [
-            "stretch"
-    ],
-        "gifAmount": 1
-    }, {
-        "names": [
-            "faceOnly"
-    ],
-        "gifAmount": 1
-    }, {
-        "names": [
-            "dissolve"
-    ],
-        "gifAmount": 1
-    }
-]
+{
+    "midi": true,
+    "sequence": [
+        {
+            "names": [
+                "ascii"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "blurDart"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "RGBSwapper"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "mirrorEcho"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "colourOffset"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "imgFX",
+                "stretch",
+                "kuwahara"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "flipDiff"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "kaleidoscope"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "reciprocal"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "circle"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "faceOnly",
+                "maximum"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "oppDiff"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "pixSort"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "stretch"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "faceOnly",
+                "imgFX"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "faceOnly",
+                "dissolve"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "kuwahara"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "stretch",
+                "palette"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "dog"
+            ],
+            "gifAmount": 0.5
+        }
+    ]
+}
