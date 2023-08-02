@@ -1,5 +1,6 @@
 from PIL import Image
 from random import randint
+import numpy as np
 
 global rOffset, gOffset, bOffset
 rOffset = (5, 0)
@@ -20,15 +21,9 @@ def callback(image, variables):
     global rOffset, gOffset, bOffset
     baked = variables[0]
     image = image.split()
-    r = baked.copy()
-    r.paste(image[0], box=rOffset)
-    r = r.split()[0]
-    g = baked.copy()
-    g.paste(image[1], box=gOffset)
-    g = g.split()[1]
-    b = baked.copy()
-    b.paste(image[2], box=bOffset)
-    b = b.split()[2]
+    r = Image.fromarray(np.roll(np.array(image[0]), rOffset, axis=(0, 1)))
+    g = Image.fromarray(np.roll(np.array(image[1]), gOffset, axis=(0, 1)))
+    b = Image.fromarray(np.roll(np.array(image[2]), bOffset, axis=(0, 1)))
     image = Image.merge("RGB", (r, g, b))
     rOffset = (
         rOffset[0] + randint(-1, 1),

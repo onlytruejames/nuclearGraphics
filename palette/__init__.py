@@ -10,7 +10,7 @@ palette = [
     (255, 255, 0)
 ]
 
-palettes = load(open("livePalette/set.json"))
+palettes = load(open("palette/set.json"))
 print(palettes)
 
 val = 0
@@ -24,7 +24,7 @@ def variables(cam, clb):
         palette = [
         [0, 0, 255],
         [255, 0, 255],
-        [0, 255, 255]
+        [0, 0, 255]
     ]
     return []
 

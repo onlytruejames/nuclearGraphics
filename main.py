@@ -1,29 +1,44 @@
+print("If you are running this for the first time, run:")
+print("sudo apt install python3-tk (if on Linux, for mac or pc look up how to install tkinter)")
+print("pip install opencv-python")
+print("pip install PIL")
+print("pip install scikit-image")
+print("pip install face-library")
+print("pip install pykuwahara")
+print("pip install mido")
+print("pip install python-rtmidi")
 import json, tkinter
-import liveAscii, liveBlurDart, liveRGBSwapper, liveMirrorEcho, liveColourOffset, liveImgFX, liveFlipDiff, liveKaleidoscope, liveReciprocal, liveCircle, liveMaximum, liveOppDiff, livePixSort, liveStretch, liveFaceOnly, liveDissolve, liveKuwahara, livePalette, liveDog
+import ascii, blurDart, rgbSwapper, mirrorEcho, colourOffset, imgFX, flipDiff, kaleidoscope, reciprocal, circle, maximum, oppDiff, pixSort, stretch, faceOnly, dissolve, kuwahara, palette, dogBlur, zoom, colourExpander, dogShift, fractalNoise, fromMic
 from PIL import Image, ImageTk
 from cv2 import VideoCapture, cvtColor, COLOR_BGR2RGB
+
 import mido, rtmidi
 
 callbacks = {
-    "ascii": liveAscii,
-    "blurDart": liveBlurDart,
-    "RGBSwapper": liveRGBSwapper,
-    "mirrorEcho": liveMirrorEcho,
-    "colourOffset": liveColourOffset,
-    "imgFX": liveImgFX,
-    "flipDiff": liveFlipDiff,
-    "kaleidoscope": liveKaleidoscope,
-    "reciprocal": liveReciprocal,
-    "circle": liveCircle,
-    "maximum": liveMaximum,
-    "oppDiff": liveOppDiff,
-    "pixSort": livePixSort,
-    "stretch": liveStretch,
-    "faceOnly": liveFaceOnly,
-    "dissolve": liveDissolve,
-    "kuwahara": liveKuwahara,
-    "palette": livePalette,
-    "dog": liveDog
+    "ascii": ascii,
+    "blurDart": blurDart,
+    "RGBSwapper": rgbSwapper,
+    "mirrorEcho": mirrorEcho,
+    "colourOffset": colourOffset,
+    "imgFX": imgFX,
+    "flipDiff": flipDiff,
+    "kaleidoscope": kaleidoscope,
+    "reciprocal": reciprocal,
+    "circle": circle,
+    "maximum": maximum,
+    "oppDiff": oppDiff,
+    "pixSort": pixSort,
+    "stretch": stretch,
+    "faceOnly": faceOnly,
+    "dissolve": dissolve,
+    "kuwahara": kuwahara,
+    "palette": palette,
+    "dogBlur": dogBlur,
+    "zoom": zoom,
+    "colourExpander": colourExpander,
+    "dogShift": dogShift,
+    "fractalNoise": fractalNoise,
+    "fromMic": fromMic
 }
 
 global currentCallback, clb, currentFrame
@@ -82,19 +97,24 @@ class fakeCam:
             frame = currentGif.copy().convert("RGB").resize((width, height))
             if currentCallback["gifAmount"] == 1:
                 return True, frame
-            result, image = self.cam.read()
+            result, image = self.getCam()
             if not result:
                 return False, frame
             image = cvtColor(image, COLOR_BGR2RGB)
             image = Image.fromarray(image)
             return True, Image.blend(image, frame, currentCallback["gifAmount"])
         except:
-            result, image = self.cam.read()
+            result, image = self.getCam()
             if not result:
                 return False, None
             image = cvtColor(image, COLOR_BGR2RGB)
             image = Image.fromarray(image)
             return True, image
+    def getCam(self):
+        result, image = self.cam.read()
+        if not result:
+            return False, None
+        return True, image
 
 def list_ports():
     #stolen from stackoverflow
@@ -172,7 +192,7 @@ def changeCallback():
     modes = currentCallback['names']
     for mode in modes:
         variables[mode] = callbacks[mode].variables(cam, clb)
-    #root.title(f"live{currentCallback['names'][0].upper()}{currentCallback['names'][1:]}")
+    #root.title(f"{currentCallback['names'][0].upper()}{currentCallback['names'][1:]}")
 
 def nextCallback(e):
     global clb

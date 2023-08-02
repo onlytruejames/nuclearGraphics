@@ -3,105 +3,150 @@
     "sequence": [
         {
             "names": [
+                "colourExpander",
                 "ascii"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "blurDart"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "RGBSwapper"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "mirrorEcho"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "colourOffset"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "imgFX",
-                "stretch",
-                "kuwahara"
+                "stretch"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "flipDiff"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "kaleidoscope"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "reciprocal"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "circle"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "faceOnly",
                 "maximum"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "oppDiff"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "pixSort"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "stretch"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "faceOnly",
                 "imgFX"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "faceOnly",
                 "dissolve"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "kuwahara"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
+                "colourExpander",
                 "stretch",
                 "palette"
             ],
             "gifAmount": 0.5
         }, {
             "names": [
-                "dog"
+                "colourExpander",
+                "dogBlur"
             ],
             "gifAmount": 0.5
+        }, {
+            "names": [
+                "colourExpander",
+                "faceOnly",
+                "zoom"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "colourExpander",
+                "zoom"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "dogShift"
+            ],
+            "gifAmount": 0.5
+        }, {
+            "names": [
+                "colourExpander",
+                "fractalNoise"
+            ]
+        }, {
+            "names": [
+                "fromMic"
+            ]
         }
     ]
 }
