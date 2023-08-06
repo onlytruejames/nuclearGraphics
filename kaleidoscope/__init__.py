@@ -33,9 +33,9 @@ def resize(img, lastImg):
     bottom = (height + h) / 2
     return lastImg.crop((left, top, right, bottom))
 
-def variables(cam, clb):
+def variables(dims, clb):
     global lastImg
-    lastImg = Image.new("RGB", (cam.get(3), cam.get(4)))
+    lastImg = Image.new("RGB", dims)
     return []
 
 def callback(image, variables):
@@ -45,6 +45,7 @@ def callback(image, variables):
     mirror = ImageOps.mirror(image)
     both = ImageOps.flip(mirror)
     img = Image.blend(Image.blend(image, flip, 0.5), Image.blend(mirror, both, 0.5), 0.5)
-    img = Image.blend(img, resize(img, lastImg), 0.5)
+    lastImg = resize(img, lastImg).resize(img.size)
+    img = Image.blend(img, lastImg, 0.5)
     lastImg = img.rotate(randint(0, 360), fillcolor=(0, 0, 0, 0))
     return img

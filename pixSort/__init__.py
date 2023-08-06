@@ -20,10 +20,14 @@ def sorts(img):
         ) % 255]))
     return img
 
-def variables(cam, clb):
+def variables(dims, clb):
     global lastImg
-    lastImg = Image.new("RGB", (cam.get(3), cam.get(4)))
+    lastImg = Image.new("RGB", dims)
     return []
+
+def changeDims(dims):
+    global lastImg
+    lastImg = lastImg.resize(dims)
 
 def callback(image, variables):
     global lastImg, frame

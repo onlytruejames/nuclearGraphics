@@ -9,10 +9,14 @@ def reciprocal(img, lastImg):
     img = (1 / ((img + lastImg) / 2 + 0.1) * randint(100, 500)).astype(np.uint8)
     return np.roll(img, randint(0, 2), axis=2)
 
-def variables(cam, clb):
+def variables(dims, clb):
     global lastImg
-    lastImg = np.asarray(Image.new("RGB", (int(cam.get(3)), int(cam.get(4)))))
-    return [lastImg]
+    lastImg = np.array(Image.new("RGB", dims))
+    return []
+
+def changeDims(dims):
+    global lastImg
+    lastImg = np.array(Image.fromarray(lastImg).resize(dims))
 
 def callback(image, variables):
     global lastImg

@@ -49,10 +49,14 @@ def difference(img, lastImg):
 
 effects = [addtract, subadd, invert1, invert2, rain2bow, difference]
 
-def variables(cam, clb):
+def variables(dims, clb):
     global lastImg
-    lastImg = np.asarray(Image.new("RGB", (int(cam.get(3)), int(cam.get(4)))))
+    lastImg = np.asarray(Image.new("RGB", dims))
     return [lastImg]
+
+def changeDims(dims):
+    global lastImg
+    lastImg = np.array(Image.fromarray(lastImg).resize(dims))
 
 def callback(image, variables):
     global lastImg

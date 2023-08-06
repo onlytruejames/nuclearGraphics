@@ -7,16 +7,21 @@ global lastImg, velocity, decay
 velocity = (0, 0)
 decay = 0.9
 
-def variables(cam, clb):
-    width, height = int(cam.get(3)), int(cam.get(4))
-    global lastImg
+def variables(dims, clb):
+    width, height = dims
+    global lastImg, transparent
     lastImg = Image.new("RGBA", (width, height))
     transparent = Image.new("RGBA", (width, height))
-    return [transparent]
+    return []
+
+def changeDims(dims):
+    global lastImg, transparent
+    lastImg = lastImg.resize(dims)
+    print(dims)
+    transparent = transparent.resize(dims)
 
 def callback(image, variables):
-    global lastImg, velocity, decay
-    transparent = variables[0]
+    global lastImg, velocity, decay, transparent
     image = image.convert("RGBA")
     transparent.paste(lastImg, box=velocity)
     image = Image.blend(image, transparent, decay)

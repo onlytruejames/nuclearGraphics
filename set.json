@@ -1,152 +1,276 @@
 {
     "midi": true,
     "sequence": [
-        {
-            "names": [
-                "colourExpander",
-                "ascii"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "blurDart"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "RGBSwapper"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "mirrorEcho"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "colourOffset"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "imgFX",
-                "stretch"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "flipDiff"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "kaleidoscope"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "reciprocal"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "circle"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "faceOnly",
-                "maximum"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "oppDiff"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "pixSort"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "stretch"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "faceOnly",
-                "imgFX"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "faceOnly",
-                "dissolve"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "kuwahara"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "stretch",
-                "palette"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "dogBlur"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "faceOnly",
-                "zoom"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "zoom"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "dogShift"
-            ],
-            "gifAmount": 0.5
-        }, {
-            "names": [
-                "colourExpander",
-                "fractalNoise"
-            ]
-        }, {
-            "names": [
-                "fromMic"
-            ]
-        }
+        [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "ascii",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "blurDart",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "RGBSwapper",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "mirrorEcho",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "colourOffset",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "imgFX",
+                "amount": 1
+            }, {
+                "name": "stretch",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "flipDiff",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "kaleidoscope",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "reciprocal",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "circle",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "faceOnly",
+                "amount": 1
+            }, {
+                "name": "maximum",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "oppDiff",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "pixSort",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "stretch",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "faceOnly",
+                "amount": 1
+            }, {
+                "name": "imgFX",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "faceOnly",
+                "amount": 1
+            }, {
+                "name": "dissolve",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "kuwahara",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "stretch",
+                "amount": 1
+            }, {
+                "name": "palette",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "dogBlur",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "faceOnly",
+                "amount": 1
+            }, {
+                "name": "zoom",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "zoom",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "imgFX",
+                "amount": 1
+            }, {
+                "name": "dogShift",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "loadImg",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "loadImg",
+                "amount": 1
+            }
+        ]
     ]
 }

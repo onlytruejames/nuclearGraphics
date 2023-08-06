@@ -13,11 +13,15 @@ direction = [1, 1]
 def clamp(n, minn, maxn):
     return max(min(maxn, n), minn)
 
-def variables(cam, clb):
+def variables(dims, clb):
     global lastImg, direction
-    lastImg = Image.new("RGB", (cam.get(3), cam.get(4)))
+    lastImg = Image.new("RGB", dims)
     direction = [1, 1]
     return []
+
+def changeDims(dims):
+    global lastImg
+    lastImg = lastImg.resize(dims)
 
 def callback(image, variables):
     global lastImg, direction

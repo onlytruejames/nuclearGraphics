@@ -4,9 +4,9 @@ import numpy as np
 gauss1 = ImageFilter.GaussianBlur(radius=2)
 gauss2 = ImageFilter.GaussianBlur(radius=4)
 
-def variables(cam, clb):
+def variables(dims, clb):
     global image
-    image = Image.new("RGBA", (cam.get(3), cam.get(4)))
+    image = Image.new("RGBA", dims)
     return []
 
 def callback(img, variables):

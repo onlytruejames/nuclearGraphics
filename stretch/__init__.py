@@ -6,9 +6,9 @@ from random import choice, randint
 global lastImg
 lastImg = Image.new("RGB", (200, 200))
 
-def variables(cam, clb):
+def variables(dims, clb):
     global lastImg
-    lastImg = Image.new("RGB", (cam.get(3), cam.get(4)))
+    lastImg = Image.new("RGB", dims)
     return []
 
 def getAverageRGBN(image):

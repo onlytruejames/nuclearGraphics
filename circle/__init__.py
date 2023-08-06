@@ -36,10 +36,9 @@ def resize(img, lastImg):
     bottom = (height + h) / 2
     return lastImg.crop((left, top, right, bottom))
 
-def variables(cam, clb):
+def variables(dims, clb):
     global lastImg, rings
-    width = cam.get(3)
-    height = cam.get(4)
+    width, height = dims
     centrey = int(width / 2 + 0.5)
     centrex = int(height / 2 + 0.5)
     for r1 in range(10, (int(min(width, height) / 2) - 10), 12):
@@ -47,22 +46,31 @@ def variables(cam, clb):
         ones = np.ones((height, width, 3), dtype=np.uint8)
         for r2 in range(randint(r-10, r-2), randint(r+2, r+10), 1):
             rr, cc = circle_perimeter(centrex, centrey, r2)
-            ones[rr, cc] = np.asarray([5, 5, 5], dtype=np.uint8)
+            ones[rr, cc] = np.array([5, 5, 5], dtype=np.uint8)
         r = (int(min(width, height) / 2) - 10) - r1
         for r2 in range(randint(r-10, r-2), randint(r+2, r+10), 1):
             rr, cc = circle_perimeter(centrex, centrey, r2)
-            ones[rr, cc] = np.asarray([0.8, 0.8, 0.8], dtype=np.uint8)
+            ones[rr, cc] = np.array([0.8, 0.8, 0.8], dtype=np.uint8)
         rings.append(ones)
-    lastImg = Image.new("RGB", (int(cam.get(3)), int(cam.get(4))))
-    return [lastImg]
+    lastImg = Image.new("RGB", (int(width), int(height)))
+    return []
+
+def changeDims(dims):
+    global lastImg, rings
+    lastImg = lastImg.resize(dims)
+    newRings = []
+    for ring in rings:
+        newRings.append(np.array(Image.fromarray(ring).resize(dims)))
+    rings = newRings
 
 def callback(img, variables):
     global lastImg, rings
-    img = (choice(rings) * np.asarray(img))
+    img = (choice(rings) * np.array(img))
     img = img.astype(np.uint16)
     img = np.clip(img, 0, 255)
     img = img.astype(np.uint8)
     img = Image.fromarray(img)
-    img = Image.blend(img, resize(img, lastImg), 0.5)
+    lastImg = resize(img, lastImg).resize(img.size)
+    img = Image.blend(img, lastImg, 0.5)
     lastImg = img.rotate(randint(0, 360), fillcolor=(0, 0, 0, 0))
     return img

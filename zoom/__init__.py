@@ -1,9 +1,9 @@
 from PIL import Image
 import random
 
-def variables(cam, clb):
+def variables(dims, clb):
     global lastImg, level
-    lastImg = Image.new("RGB", (int(cam.get(3)), int(cam.get(4))))
+    lastImg = Image.new("RGB", dims)
     level = 0
     return []
 

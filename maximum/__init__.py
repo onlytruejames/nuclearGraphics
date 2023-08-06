@@ -4,12 +4,15 @@ import math as maths
 from random import choice, randint
 
 global lastImg
-lastImg = np.asarray(Image.new("RGB", (200, 200)))
 
-def variables(cam, clb):
+def variables(dims, clb):
     global lastImg
-    lastImg = np.asarray(Image.new("RGB", (cam.get(3), cam.get(4))))
+    lastImg = Image.new("RGB", dims)
     return []
+
+def changeDims(dims):
+    global lastImg
+    lastImg = lastImg.resize(dims)
 
 def callback(image, variables):
     global lastImg

@@ -8,9 +8,8 @@ print("pip install pykuwahara")
 print("pip install mido")
 print("pip install python-rtmidi")
 import json, tkinter
-import ascii, blurDart, rgbSwapper, mirrorEcho, colourOffset, imgFX, flipDiff, kaleidoscope, reciprocal, circle, maximum, oppDiff, pixSort, stretch, faceOnly, dissolve, kuwahara, palette, dogBlur, zoom, colourExpander, dogShift, fractalNoise, fromMic
+import ascii, blurDart, rgbSwapper, mirrorEcho, colourOffset, imgFX, flipDiff, kaleidoscope, reciprocal, circle, maximum, oppDiff, pixSort, stretch, faceOnly, dissolve, kuwahara, palette, dogBlur, zoom, colourExpander, dogShift, camera, loadImg
 from PIL import Image, ImageTk
-from cv2 import VideoCapture, cvtColor, COLOR_BGR2RGB
 
 import mido, rtmidi
 
@@ -37,8 +36,8 @@ callbacks = {
     "zoom": zoom,
     "colourExpander": colourExpander,
     "dogShift": dogShift,
-    "fractalNoise": fractalNoise,
-    "fromMic": fromMic
+    "camera": camera,
+    "loadImg": loadImg
 }
 
 global currentCallback, clb, currentFrame
@@ -82,77 +81,8 @@ sequence = set["sequence"]
 
 ASCII_CHARS = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", "."]
 
-class fakeCam:
-    def __init__(self, port):
-        self.cam = VideoCapture(port)
-    def get(self, x):
-        return int(self.cam.get(x))
-    def read(self):
-        global currentFrame, currentGif, frameNum
-        currentFrame += 1
-        try:
-            if currentFrame >= frameNum - 1:
-                currentFrame = 0
-            currentGif.seek(currentFrame)
-            frame = currentGif.copy().convert("RGB").resize((width, height))
-            if currentCallback["gifAmount"] == 1:
-                return True, frame
-            result, image = self.getCam()
-            if not result:
-                return False, frame
-            image = cvtColor(image, COLOR_BGR2RGB)
-            image = Image.fromarray(image)
-            return True, Image.blend(image, frame, currentCallback["gifAmount"])
-        except:
-            result, image = self.getCam()
-            if not result:
-                return False, None
-            image = cvtColor(image, COLOR_BGR2RGB)
-            image = Image.fromarray(image)
-            return True, image
-    def getCam(self):
-        result, image = self.cam.read()
-        if not result:
-            return False, None
-        return True, image
-
-def list_ports():
-    #stolen from stackoverflow
-    nonWorkingPorts = []
-    devPort = 0
-    workingPorts = []
-    while not len(nonWorkingPorts):
-        camera = VideoCapture(devPort)
-        if camera.isOpened():
-            isReading, img = camera.read()
-            if isReading:
-                workingPorts.append(devPort)
-            else:
-                nonWorkingPorts.append(devPort)
-        else:
-            nonWorkingPorts.append(devPort)
-        devPort +=1
-    return workingPorts
-
-ports = list_ports()
-
-if len(ports) == 0:
-    print("No camera ports are available, try plugging in a camera and try again")
-    port = False
-
-elif len(ports) == 1:
-    port = 0
-
-else:
-    done = False
-    while not done:
-        port = int(input(f"Choose a camera port from this list: {ports}"))
-        if port in ports:
-            done = True
-        else:
-            print("Invalid port")
-
 def callback(e):
+    global dims
     root.bind("<Button-1>", nextCallback)
     nextCallback(e)
     while True:
@@ -161,37 +91,47 @@ def callback(e):
             if msg.type == "note_on":
                 nextCallback(e)
         try:
-            result, image = cam.read()
-            if result:
-                for cb in currentCallback['names']:
-                    image = callbacks[cb].callback(image, variables[cb])
-                winWidth = root.winfo_width()
-                winHeight = root.winfo_height()
-                if winWidth / width > winHeight / height:
-                    resize = winHeight / height
-                else:
-                    resize = winWidth / width
-                img = image.resize((
-                    int(width * resize),
-                    int(height * resize)
-                ))
-                img = ImageTk.PhotoImage(img)
-                label.configure(image = img)
-                label.image = img
-                root.update()
+            newDims = (int(root.winfo_reqwidth() / 2), int(root.winfo_reqheight() / 2))
+            if not dims == newDims:
+                for cb in currentCallback:
+                    try:
+                        callbacks[cb["name"]].changeDims(newDims)
+                    except:
+                        continue
+            dims = newDims
+            image = Image.new("RGB", dims)
+            for cb in currentCallback:
+                image = callbacks[cb["name"]].callback(image, variables[cb["name"]])
+            winWidth = root.winfo_width()
+            winHeight = root.winfo_height()
+            if winWidth / dims[0] > winHeight / dims[1]:
+                resize = winHeight / dims[1]
+            else:
+                resize = winWidth / dims[0]
+            img = image.resize((
+                int(dims[0] * resize),
+                int(dims[1] * resize)
+            ))
+            img = ImageTk.PhotoImage(img)
+            label.configure(image = img)
+            label.image = img
+            root.update()
         except Exception as e:
             root.quit()
             raise e
 
 def changeCallback():
-    global currentCallback, clb, root, currentGif, currentFrame, frameNum
-    frameNum = frameNums[clb]
-    currentFrame = 0
-    currentGif = gifs[clb]
+    global currentCallback, clb, root, dims
     currentCallback = sequence[clb]
-    modes = currentCallback['names']
-    for mode in modes:
-        variables[mode] = callbacks[mode].variables(cam, clb)
+    #modes = currentCallback['names']
+    #for mode in modes:
+    #    variables[mode] = callbacks[mode].variables(cam, clb)
+    for cb in currentCallback:
+        variables[cb["name"]] = callbacks[cb["name"]].variables(dims, clb)
+        try:
+            callbacks[cb["name"]].changeDims(dims)
+        except:
+            continue
     #root.title(f"{currentCallback['names'][0].upper()}{currentCallback['names'][1:]}")
 
 def nextCallback(e):
@@ -207,51 +147,24 @@ def prevCallback(e):
     clb -= 1
     changeCallback()
 
-if type(port) == int:
-    global cam, root, frames
-    cam = fakeCam(port)
-    width = int(cam.get(3))
-    height = int(cam.get(4))
+global cam, root, frames, dims
 
-    variables = {}
+variables = {}
 
-    for cb in callbacks.keys():
-        variables[cb] = []
+for cb in callbacks.keys():
+    variables[cb] = []
 
-    gifs = []
-    frameNums = []
+root = tkinter.Tk()
+dims = (root.winfo_reqwidth(), root.winfo_reqheight())
 
-    for event in range(len(sequence)):
-        try:
-            if sequence[event]["gifAmount"] > 0:
-                gifs.append(Image.open(f"gifs/{event}.gif"))
-                theGif = gifs[-0]
-                num = 0
-                while True:
-                    try:
-                        theGif.seek(num + 1)
-                        num += 1
-                    except:
-                        break
-                frameNums.append(num)
-            else:
-                gifs.append(False)
-                frameNums.append(1)
-        except:
-            gifs.append(False)
-            frameNums.append(1)
+root.title("NuclearGraphics")
 
-    root = tkinter.Tk()
+img1 = ImageTk.PhotoImage(Image.open("nuclearGraphics.png"))
 
-    root.geometry("750x600")
-    root.title("NuclearGraphics")
+label = tkinter.Label(root, image = img1, borderwidth=0, highlightthickness=0)
+label.pack()
 
-    img1 = ImageTk.PhotoImage(Image.open("nuclearGraphics.png"))
-
-    label = tkinter.Label(root, image = img1, borderwidth=0, highlightthickness=0)
-    label.pack()
-
-    root.bind("<Right>", nextCallback)
-    root.bind("<Left>", prevCallback)
-    root.bind("<Return>", callback)
-    root.mainloop()
+root.bind("<Right>", nextCallback)
+root.bind("<Left>", prevCallback)
+root.bind("<Return>", callback)
+root.mainloop()

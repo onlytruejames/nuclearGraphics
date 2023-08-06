@@ -13,7 +13,7 @@ COMMON_MONO_FONTFILENAMES = [
     'Consola.ttf'
 ]
 
-def variables(cam, clb):
+def variables(dims, clb):
     font = None
     for fontFilename in COMMON_MONO_FONTFILENAMES:
         try:
@@ -23,8 +23,7 @@ def variables(cam, clb):
             print(f'Could not load font "{fontFilename}".')
     if font is None:
         font = ImageFont.load_default()
-    width = cam.get(3)
-    height = cam.get(4)
+    width, height = dims
     newWidth = int(width / 8)
     newHeight = int(height / 8)
 
