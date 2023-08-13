@@ -283,6 +283,36 @@
                 "name": "colourExpander",
                 "amount": 1
             }
+        ],
+        [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "pixelate",
+                "amount": 0.5
+            }, {
+                "name": "diffThresh",
+                "amount": 1
+            }
+        ],
+        [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "imgFX",
+                "amount": 1
+            }, {
+                "name": "stretch",
+                "amount": 1
+            }, {
+                "name": "loadImg",
+                "amount": 1
+            }
         ]
     ]
 }

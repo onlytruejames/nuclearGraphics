@@ -8,9 +8,8 @@ print("pip install pykuwahara")
 print("pip install mido")
 print("pip install python-rtmidi")
 import json, tkinter
-import ascii, blurDart, rgbSwapper, mirrorEcho, colourOffset, imgFX, flipDiff, kaleidoscope, reciprocal, circle, maximum, oppDiff, pixSort, stretch, faceOnly, dissolve, kuwahara, palette, dogBlur, zoom, colourExpander, dogShift, camera, loadImg, diffThresh
+import ascii, blurDart, rgbSwapper, mirrorEcho, colourOffset, imgFX, flipDiff, kaleidoscope, reciprocal, circle, maximum, oppDiff, pixSort, stretch, faceOnly, dissolve, kuwahara, palette, dogBlur, zoom, colourExpander, dogShift, camera, loadImg, diffThresh, pixelate
 from PIL import Image, ImageTk
-
 import mido, rtmidi
 
 callbacks = {
@@ -38,12 +37,12 @@ callbacks = {
     "dogShift": dogShift,
     "camera": camera,
     "loadImg": loadImg,
-    "diffThresh": diffThresh
+    "diffThresh": diffThresh,
+    "pixelate": pixelate
 }
 
-global currentCallback, clb, currentFrame
+global currentCallback, clb
 clb = -1
-currentFrame = 0
 
 set = json.load(open("set.json", "r"))
 isMidi = set["midi"]
@@ -83,7 +82,7 @@ sequence = set["sequence"]
 ASCII_CHARS = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", "."]
 
 def callback(e):
-    global dims
+    global dims, transparent
     root.bind("<Button-1>", nextCallback)
     nextCallback(e)
     while True:
@@ -94,15 +93,18 @@ def callback(e):
         try:
             newDims = (int(root.winfo_reqwidth() / 2), int(root.winfo_reqheight() / 2))
             if not dims == newDims:
+                dims = newDims
+                transparent = Image.new("RGBA", newDims, (0, 0, 0, 0))
                 for cb in currentCallback:
                     try:
                         callbacks[cb["name"]].changeDims(newDims)
                     except:
                         continue
-            dims = newDims
-            image = Image.new("RGB", dims)
+            image = Image.new("RGBA", dims)
             for cb in currentCallback:
-                image = callbacks[cb["name"]].callback(image, variables[cb["name"]])
+                newImage = callbacks[cb["name"]].callback(image.convert("RGB"), variables[cb["name"]]).convert("RGBA")
+                newImage = Image.blend(transparent, newImage, cb["amount"])
+                image = Image.alpha_composite(image, newImage)
             winWidth = root.winfo_width()
             winHeight = root.winfo_height()
             if winWidth / dims[0] > winHeight / dims[1]:
@@ -148,7 +150,7 @@ def prevCallback(e):
     clb -= 1
     changeCallback()
 
-global cam, root, frames, dims
+global dims, transparent
 
 variables = {}
 
@@ -157,6 +159,7 @@ for cb in callbacks.keys():
 
 root = tkinter.Tk()
 dims = (root.winfo_reqwidth(), root.winfo_reqheight())
+transparent = Image.new("RGBA", dims, (0, 0, 0, 0))
 
 root.title("NuclearGraphics")
 

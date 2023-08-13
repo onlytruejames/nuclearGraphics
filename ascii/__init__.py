@@ -14,6 +14,7 @@ COMMON_MONO_FONTFILENAMES = [
 ]
 
 def variables(dims, clb):
+    global font, imageHeight, imageWidth, newHeight, newWidth
     font = None
     for fontFilename in COMMON_MONO_FONTFILENAMES:
         try:
@@ -26,6 +27,7 @@ def variables(dims, clb):
     width, height = dims
     newWidth = int(width / 8)
     newHeight = int(height / 8)
+    imageHeight, imageWidth = (int(width * 1.5), int(height * 2))
 
     #font_points_to_pixels = lambda pt: round(pt * 96.0 / 72)
     #tallest_line = max(ASCII_CHARS, key=lambda line: font.getsize(line)[1])
@@ -33,7 +35,7 @@ def variables(dims, clb):
     #realistic_line_height = max_line_height * 0.8
     #imageHeight = int(realistic_line_height * newHeight) + 1
     
-    return [font, int(width * 1.5), int(height * 2), newHeight, newWidth]
+    return []
 
 class ImageToAscii:
     #adapted from the library image_to_ascii, which printed the output and if you wanted it to you could save it to a file, so i changed bits of it
@@ -49,7 +51,6 @@ class ImageToAscii:
         grayscale_image = image.convert("L")
         return(grayscale_image)
         
-
     def pixelsToAscii(self,image):
         pixels = image.getdata()
         characters = "".join([ASCII_CHARS[pixel//25] for pixel in pixels])
@@ -106,12 +107,7 @@ def textfile_to_image(lines):
 
 def callback(img, variables):
     global font, imageHeight, imageWidth, newHeight, newWidth
-    font = variables[0]
-    imageHeight = variables[1]
-    imageWidth = variables[2]
-    newHeight = variables[3]
-    newWidth = variables[4]
-    img = textfile_to_image(ImageToAscii(img).asciiImage)
+    img = textfile_to_image(ImageToAscii(img).asciiImage).resize(img.size)
     global iter
     iter += 1
     return img

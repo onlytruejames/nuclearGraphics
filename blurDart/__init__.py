@@ -14,7 +14,12 @@ def variables(dims, clb):
     div5size = (int(dims[0] / 5), int(dims[1] / 5))
     return []
 
+def changeDims(dims):
+    global div5size
+    div5size = (int(dims[0] / 5), int(dims[1] / 5))
+
 def callback(image, variables):
+    origSize = image.size
     global div5size
     width, height = div5size[0], div5size[1]
 
@@ -39,4 +44,4 @@ def callback(image, variables):
         int(img.height)
     )), image, 0.5)
     img = Image.blend(img, image, 0.5)
-    return img
+    return img.resize(origSize)
