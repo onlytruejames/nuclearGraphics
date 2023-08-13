@@ -8,7 +8,7 @@ print("pip install pykuwahara")
 print("pip install mido")
 print("pip install python-rtmidi")
 import json, tkinter
-import ascii, blurDart, rgbSwapper, mirrorEcho, colourOffset, imgFX, flipDiff, kaleidoscope, reciprocal, circle, maximum, oppDiff, pixSort, stretch, faceOnly, dissolve, kuwahara, palette, dogBlur, zoom, colourExpander, dogShift, camera, loadImg
+import ascii, blurDart, rgbSwapper, mirrorEcho, colourOffset, imgFX, flipDiff, kaleidoscope, reciprocal, circle, maximum, oppDiff, pixSort, stretch, faceOnly, dissolve, kuwahara, palette, dogBlur, zoom, colourExpander, dogShift, camera, loadImg, diffThresh
 from PIL import Image, ImageTk
 
 import mido, rtmidi
@@ -37,7 +37,8 @@ callbacks = {
     "colourExpander": colourExpander,
     "dogShift": dogShift,
     "camera": camera,
-    "loadImg": loadImg
+    "loadImg": loadImg,
+    "diffThresh": diffThresh
 }
 
 global currentCallback, clb, currentFrame

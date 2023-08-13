@@ -271,6 +271,18 @@
                 "name": "loadImg",
                 "amount": 1
             }
+        ],
+        [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "diffThresh",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }
         ]
     ]
 }
