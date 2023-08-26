@@ -271,8 +271,7 @@
                 "name": "loadImg",
                 "amount": 1
             }
-        ],
-        [
+        ], [
             {
                 "name": "camera",
                 "amount": 1
@@ -283,8 +282,7 @@
                 "name": "colourExpander",
                 "amount": 1
             }
-        ],
-        [
+        ], [
             {
                 "name": "camera",
                 "amount": 1
@@ -298,8 +296,7 @@
                 "name": "diffThresh",
                 "amount": 1
             }
-        ],
-        [
+        ], [
             {
                 "name": "camera",
                 "amount": 1
@@ -311,6 +308,86 @@
                 "amount": 1
             }, {
                 "name": "loadImg",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "faceOnly",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "loadImg",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "kuwahara",
+                "amount": 1
+            }, {
+                "name": "dogShift",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "change",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "colourRemover",
+                "amount": 1
+            }, {
+                "name": "stretch",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "colourExpander",
+                "amount": 1
+            }, {
+                "name": "brightThresh",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "sine",
+                "amount": 1
+            }, {
+                "name": "stretch",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "feedback",
                 "amount": 1
             }
         ]
