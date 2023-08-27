@@ -107,7 +107,7 @@ def callback(e):
                         continue
             image = Image.new("RGBA", dims)
             for cb in currentCallback:
-                newImage = callbacks[cb["name"]].callback(image.convert("RGB"), variables[cb["name"]]).convert("RGBA")
+                newImage = callbacks[cb["name"]].callback(image.convert("RGB")).convert("RGBA")
                 newImage = Image.blend(transparent, newImage, cb["amount"])
                 image = Image.alpha_composite(image, newImage)
             winWidth = root.winfo_width()
@@ -135,7 +135,10 @@ def changeCallback():
     #for mode in modes:
     #    variables[mode] = callbacks[mode].variables(cam, clb)
     for cb in currentCallback:
-        variables[cb["name"]] = callbacks[cb["name"]].variables(dims, clb)
+        try:
+            callbacks[cb["name"]].variables(dims, clb)
+        except:
+            continue
         try:
             callbacks[cb["name"]].changeDims(dims)
         except:
@@ -156,11 +159,6 @@ def prevCallback(e):
     changeCallback()
 
 global dims, transparent
-
-variables = {}
-
-for cb in callbacks.keys():
-    variables[cb] = []
 
 root = tkinter.Tk()
 dims = (root.winfo_reqwidth(), root.winfo_reqheight())

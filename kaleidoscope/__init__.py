@@ -36,9 +36,8 @@ def resize(img, lastImg):
 def variables(dims, clb):
     global lastImg
     lastImg = Image.new("RGB", dims)
-    return []
 
-def callback(image, variables):
+def callback(image):
     global lastImg
     image = image.convert("RGB")
     flip = ImageOps.flip(image)

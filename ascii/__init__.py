@@ -34,8 +34,6 @@ def variables(dims, clb):
     #max_line_height = font_points_to_pixels(font.getsize(tallest_line)[1])
     #realistic_line_height = max_line_height * 0.8
     #imageHeight = int(realistic_line_height * newHeight) + 1
-    
-    return []
 
 class ImageToAscii:
     #adapted from the library image_to_ascii, which printed the output and if you wanted it to you could save it to a file, so i changed bits of it
@@ -105,7 +103,7 @@ def textfile_to_image(lines):
 
     return image
 
-def callback(img, variables):
+def callback(img):
     global font, imageHeight, imageWidth, newHeight, newWidth
     img = textfile_to_image(ImageToAscii(img).asciiImage).resize(img.size)
     global iter

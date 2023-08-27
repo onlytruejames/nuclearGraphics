@@ -23,13 +23,12 @@ def sorts(img):
 def variables(dims, clb):
     global lastImg
     lastImg = Image.new("RGB", dims)
-    return []
 
 def changeDims(dims):
     global lastImg
     lastImg = lastImg.resize(dims)
 
-def callback(image, variables):
+def callback(image):
     global lastImg, frame
     image = Image.blend(image, lastImg, 0.5)
     match frame % 4:

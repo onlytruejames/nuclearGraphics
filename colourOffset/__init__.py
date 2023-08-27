@@ -9,16 +9,13 @@ bOffset = (0, 0)
 
 def variables(dims, clb):
     width, height = dims
-    baked = Image.new("RGB", (width, height))
     global rOffset, gOffset, bOffset
     rOffset = (5, 0)
     gOffset = (0, 5)
     bOffset = (0, 0)
-    return [baked]
 
-def callback(image, variables):
+def callback(image):
     global rOffset, gOffset, bOffset
-    baked = variables[0]
     image = image.split()
     r = Image.fromarray(np.roll(np.array(image[0]), rOffset, axis=(0, 1)))
     g = Image.fromarray(np.roll(np.array(image[1]), gOffset, axis=(0, 1)))

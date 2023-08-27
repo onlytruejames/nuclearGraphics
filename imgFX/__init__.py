@@ -2,9 +2,6 @@ from PIL import Image
 import numpy as np
 from random import choice, randint
 
-global lastImg
-lastImg = np.asarray(Image.new("RGB", (200, 200)))
-
 def addtract(img, lastImg):
     lastImg -= 127
     img = np.add(img, lastImg)
@@ -45,20 +42,19 @@ def difference(img, lastImg):
     four = np.roll(lastImg, -1, axis=(0, 1))
     img += np.floor_divide(one + two + three + four, 4)
     img = Image.fromarray(img)
-    return np.asarray(img.convert("RGB"))
+    return np.array(img.convert("RGB"))
 
 effects = [addtract, subadd, invert1, invert2, rain2bow, difference]
 
 def variables(dims, clb):
     global lastImg
-    lastImg = np.asarray(Image.new("RGB", dims))
-    return [lastImg]
+    lastImg = np.array(Image.new("RGB", dims))
 
 def changeDims(dims):
     global lastImg
     lastImg = np.array(Image.fromarray(lastImg).resize(dims))
 
-def callback(image, variables):
+def callback(image):
     global lastImg
     img = choice(effects)(np.asarray(image), lastImg)
     lastImg = img

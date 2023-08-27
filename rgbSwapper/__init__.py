@@ -9,10 +9,7 @@ import tkinter
 
 halfPi = pi / 2
 
-def variables(cam, clb):
-    return []
-
-def callback(image, variables):
+def callback(image):
     image = list(image.split())
     shuffle(image)
     return Image.merge("RGB", tuple(image))

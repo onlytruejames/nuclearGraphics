@@ -1,10 +1,7 @@
 from PIL import Image, ImageEnhance
 import numpy as np
 
-def variables(cam, clb):
-    return []
-
-def callback(img, variables):
+def callback(img):
     img = np.array(img).astype(np.int64)
     min = np.min(img)
     max = np.max(img)

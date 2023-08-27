@@ -4,10 +4,7 @@ import random
 
 gaussian = ImageFilter.GaussianBlur()
 
-def variables(dims, clb):
-    return []
-
-def callback(img, variables):
+def callback(img):
     coords = (random.randint(0, img.width - 1), random.randint(0, img.height - 1))
     mask = np.array(img.filter(gaussian).convert("L")).astype("int64")
     img = np.array(img)

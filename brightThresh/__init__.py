@@ -8,9 +8,8 @@ gaussian = ImageFilter.GaussianBlur()
 def variables(dims, clb):
     global x
     x = 0
-    return []
 
-def callback(img, variables):
+def callback(img):
     global x
     x += 0.1
     if x > maths.pi:

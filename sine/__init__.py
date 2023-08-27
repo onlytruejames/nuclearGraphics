@@ -5,9 +5,8 @@ from math import sin
 def variables(dims, clb):
     global i
     i = 0
-    return []
 
-def callback(img, variables):
+def callback(img):
     global i
     i += 0.1
     if i > 3.1:

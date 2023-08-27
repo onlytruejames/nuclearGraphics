@@ -13,9 +13,8 @@ def variables(dims, calb):
     global i, clb
     clb = str(calb)
     i = 0
-    return []
 
-def callback(image, variables):
+def callback(image):
     global clb, i, imgs
     try:
         img = imgs[clb]

@@ -5,9 +5,8 @@ def variables(dims, clb):
     global lastImg, level
     lastImg = Image.new("RGB", dims)
     level = 0
-    return []
 
-def callback(img, variables):
+def callback(img):
     global lastImg, level
     img = img.convert("RGBA")
     lastImg.putalpha(Image.new("L", lastImg.size, 127 + abs(level)))

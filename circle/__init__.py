@@ -53,7 +53,6 @@ def variables(dims, clb):
             ones[rr, cc] = np.array([0.8, 0.8, 0.8], dtype=np.uint8)
         rings.append(ones)
     lastImg = Image.new("RGB", (int(width), int(height)))
-    return []
 
 def changeDims(dims):
     global lastImg, rings
@@ -63,7 +62,7 @@ def changeDims(dims):
         newRings.append(np.array(Image.fromarray(ring).resize(dims)))
     rings = newRings
 
-def callback(img, variables):
+def callback(img):
     global lastImg, rings
     img = (choice(rings) * np.array(img))
     img = img.astype(np.uint16)

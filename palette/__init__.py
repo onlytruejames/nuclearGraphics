@@ -26,9 +26,8 @@ def variables(cam, clb):
         [255, 0, 255],
         [0, 255, 255]
     ]
-    return []
 
-def callback(img, variables):
+def callback(img):
     global val
     p_img = Image.new('P', (16, 16))
     lenPaletteSector = int(256 / len(palette))

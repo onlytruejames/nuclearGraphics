@@ -12,13 +12,12 @@ unsharp = ImageFilter.UnsharpMask(radius = 10, percent = 1000)
 def variables(dims, clb):
     global div5size
     div5size = (int(dims[0] / 5), int(dims[1] / 5))
-    return []
 
 def changeDims(dims):
     global div5size
     div5size = (int(dims[0] / 5), int(dims[1] / 5))
 
-def callback(image, variables):
+def callback(image):
     origSize = image.size
     global div5size
     width, height = div5size[0], div5size[1]

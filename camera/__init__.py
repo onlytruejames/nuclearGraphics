@@ -1,9 +1,6 @@
 from cv2 import VideoCapture, cvtColor, COLOR_BGR2RGB
 from PIL import Image
 
-def variables(idg, af):
-    return []
-
 #stolen from stackoverflow
 nonWorkingPorts = []
 devPort = 0
@@ -38,7 +35,7 @@ else:
 
 cam = VideoCapture(port)
 
-def callback(image, variables):
+def callback(image):
     result, img = cam.read()
     if not result:
         return image

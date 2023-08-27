@@ -16,13 +16,12 @@ effects = [difference]
 def variables(dims, clb):
     global lastImg
     lastImg = Image.new("RGB", dims)
-    return []
 
 def changeDims(dims):
     global lastImg
     lastImg = lastImg.resize(dims)
 
-def callback(image, variables):
+def callback(image):
     global lastImg
     img = choice(effects)(np.asarray(image), np.asarray(lastImg))
     lastImg = Image.blend(image, lastImg, 0.5)

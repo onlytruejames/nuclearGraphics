@@ -14,14 +14,13 @@ def variables(dims, clb):
     locVel = np.array([0, 0], dtype=np.float64)
     rotVel = 0
     expVel = 0
-    return []
 
 def changeDims(dims):
     global lastImg, baseImg
     lastImg = lastImg.resize(dims)
     baseImg = baseImg.resize(dims)
 
-def callback(img, vars):
+def callback(img):
     img = img.convert("RGBA")
     global lastImg, location, rotation, expansion, locVel, rotVel, expVel, baseImg
     lastImg = lastImg.filter(gaussian)

@@ -3,13 +3,9 @@ import numpy as np
 import math as maths
 from random import choice, randint
 
-global lastImg
-lastImg = Image.new("RGB", (200, 200))
-
 def variables(dims, clb):
     global lastImg
     lastImg = Image.new("RGB", dims)
-    return []
 
 def getAverageRGBN(image):
   im = np.array(image)
@@ -17,7 +13,7 @@ def getAverageRGBN(image):
   im.shape = (w*h, d)
   return tuple(np.average(im, axis=0))
 
-def callback(img, variables):
+def callback(img):
     global lastImg
     brightness = abs(maths.cos(ImageStat.Stat(lastImg.convert("L")).mean[0] + randint(-2, 2))) * 255
     if maths.sin(brightness) >= 0:

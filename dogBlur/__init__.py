@@ -7,13 +7,12 @@ gauss2 = ImageFilter.GaussianBlur(radius=4)
 def variables(dims, clb):
     global image
     image = Image.new("RGBA", dims)
-    return []
 
 def changeDims(dims):
     global image
     image = image.resize(dims)
 
-def callback(img, variables):
+def callback(img):
     global image
     img1 = np.array(img.filter(gauss1), dtype="int64")
     img2 = np.array(img.filter(gauss2), dtype="int64")

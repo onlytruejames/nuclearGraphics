@@ -6,14 +6,13 @@ thresh = 50
 def variables(dims, clb):
     global lastImg
     lastImg = False
-    return []
 
 def changeDims(dims):
     global lastImg
     if lastImg:
         lastImg = lastImg.resize(dims)
 
-def callback(image, variables):
+def callback(image):
     global lastImg
     if not lastImg:
         lastImg = image

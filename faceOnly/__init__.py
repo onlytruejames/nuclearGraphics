@@ -17,13 +17,12 @@ def variables(dims, clb):
     global lastImg, direction
     lastImg = Image.new("RGB", dims)
     direction = [1, 1]
-    return []
 
 def changeDims(dims):
     global lastImg
     lastImg = lastImg.resize(dims)
 
-def callback(image, variables):
+def callback(image):
     global lastImg, direction
     direction = [
         direction[0] / maths.sqrt(direction[0] ** 2 + direction[1] ** 2),

@@ -12,7 +12,6 @@ def variables(dims, clb):
     global lastImg, transparent
     lastImg = Image.new("RGBA", (width, height))
     transparent = Image.new("RGBA", (width, height))
-    return []
 
 def changeDims(dims):
     global lastImg, transparent
@@ -20,7 +19,7 @@ def changeDims(dims):
     print(dims)
     transparent = transparent.resize(dims)
 
-def callback(image, variables):
+def callback(image):
     global lastImg, velocity, decay, transparent
     image = image.convert("RGBA")
     transparent.paste(lastImg, box=velocity)

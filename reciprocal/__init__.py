@@ -12,13 +12,12 @@ def reciprocal(img, lastImg):
 def variables(dims, clb):
     global lastImg
     lastImg = np.array(Image.new("RGB", dims))
-    return []
 
 def changeDims(dims):
     global lastImg
     lastImg = np.array(Image.fromarray(lastImg).resize(dims))
 
-def callback(image, variables):
+def callback(image):
     global lastImg
     img = reciprocal(image, lastImg)
     lastImg = img

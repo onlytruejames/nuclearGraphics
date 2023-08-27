@@ -11,13 +11,12 @@ def variables(dims, clb):
     x = 0
     y = 0
     image = Image.new("RGBA", dims)
-    return []
 
 def changeDims(dims):
     global image
     image = image.resize(dims)
 
-def callback(img, variables):
+def callback(img):
     global image, i, x, y
     img1 = np.array(img.filter(gauss1), dtype="int64")
     img2 = np.array(img.filter(gauss2), dtype="int64")
