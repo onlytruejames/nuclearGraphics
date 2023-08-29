@@ -10,6 +10,8 @@ def variables(dims, clb):
     x = 0
 
 def callback(img):
+    alpha = img.getchannel("A")
+    img = img.convert("RGB")
     global x
     x += 0.1
     if x > maths.pi:
@@ -20,4 +22,6 @@ def callback(img):
     img = np.array(img)
     mask -= maths.sin(x) * (np.max(mask) - np.min(mask))
     mask = np.clip(np.floor(np.abs(mask)) - 10, 0, 1)
-    return Image.fromarray(img * np.expand_dims(mask.astype("uint8"), 2))
+    img = Image.fromarray(img * np.expand_dims(mask.astype("uint8"), 2))
+    img.putalpha(alpha)
+    return img

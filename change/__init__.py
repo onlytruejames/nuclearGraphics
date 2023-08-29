@@ -10,7 +10,11 @@ def changeDims(dims):
     lastImg = lastImg.resize(dims)
 
 def callback(image):
+    alpha = image.getchannel("A")
+    image = image.convert("RGB")
     global lastImg
     img = np.abs(np.array(image).astype("int64") - np.array(lastImg).astype("int64"))
     lastImg = image
-    return Image.fromarray(img.astype("uint8"))
+    image = Image.fromarray(img.astype("uint8"))
+    image.putalpha(alpha)
+    return image

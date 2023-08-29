@@ -1,5 +1,4 @@
-from random import shuffle, randint
-from cv2 import VideoCapture, cvtColor, COLOR_BGR2RGB
+from random import shuffle
 from math import sin, pi
 from PIL import (
     Image,
@@ -11,8 +10,10 @@ halfPi = pi / 2
 
 def callback(image):
     image = list(image.split())
-    shuffle(image)
-    return Image.merge("RGB", tuple(image))
+    rgb = image[0:3]
+    shuffle(rgb)
+    rgb.append(image[3])
+    return Image.merge("RGBA", tuple(rgb))
 
 size = 99
 

@@ -127,6 +127,9 @@
             }, {
                 "name": "maximum",
                 "amount": 1
+            }, {
+                "name": "fadeBack",
+                "amount": 1
             }
         ], [
             {
@@ -223,6 +226,9 @@
                 "amount": 1
             }, {
                 "name": "dogBlur",
+                "amount": 1
+            }, {
+                "name": "fadeBack",
                 "amount": 1
             }
         ], [
@@ -321,6 +327,9 @@
                 "name": "colourExpander",
                 "amount": 1
             }, {
+                "name": "fadeBack",
+                "amount": 1
+            }, {
                 "name": "loadImg",
                 "amount": 1
             }
@@ -359,6 +368,9 @@
             }, {
                 "name": "stretch",
                 "amount": 1
+            }, {
+                "name": "fadeBack",
+                "amount": 1
             }
         ], [
             {
@@ -388,6 +400,25 @@
                 "amount": 1
             }, {
                 "name": "feedback",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "loadImg",
+                "amount": 1
+            }, {
+                "name": "fadeBack",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "faceCentre",
+                "amount": 1
+            }, {
+                "name": "fadeBack",
                 "amount": 1
             }
         ]

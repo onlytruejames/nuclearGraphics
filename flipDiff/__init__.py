@@ -22,11 +22,14 @@ def changeDims(dims):
     lastImg = lastImg.resize(dims)
 
 def callback(image):
+    alpha = image.getchannel("A")
+    image = image.convert("RGB")
     global lastImg
-    img = choice(effects)(np.asarray(image), np.asarray(lastImg))
+    img = choice(effects)(np.array(image), np.array(lastImg))
     lastImg = Image.blend(image, lastImg, 0.5)
     if randint(0, 1) == 0:
         lastImg = ImageOps.mirror(lastImg)
     else:
         lastImg = ImageOps.flip(lastImg)
+    img.putalpha(alpha)
     return img

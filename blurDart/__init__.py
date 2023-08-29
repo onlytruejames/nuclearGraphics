@@ -5,7 +5,7 @@ from PIL import (
 )
 
 global lastImg
-lastImg = Image.new("RGB", (200, 200))
+lastImg = Image.new("RGBA", (200, 200))
 gaussian = ImageFilter.GaussianBlur(radius = 10)
 unsharp = ImageFilter.UnsharpMask(radius = 10, percent = 1000)
 

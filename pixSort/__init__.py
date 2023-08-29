@@ -4,8 +4,7 @@ import math as maths
 from random import choice, randint
 import noise
 
-global lastImg, frame
-lastImg = Image.new("RGB", (200, 200))
+global frame
 frame = 0
 
 map = [noise.pnoise2(maths.cos(maths.pi / (x * 100 + 0.1)), maths.sin(maths.pi / (x * 100 + 0.1))) for x in range(256)]
@@ -22,7 +21,7 @@ def sorts(img):
 
 def variables(dims, clb):
     global lastImg
-    lastImg = Image.new("RGB", dims)
+    lastImg = Image.new("RGBA", dims)
 
 def changeDims(dims):
     global lastImg

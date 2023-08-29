@@ -1,6 +1,6 @@
 from PIL import Image
 from face_lib import face_lib
-import cv2, random
+import random
 import numpy as np
 import math as maths
 
@@ -15,7 +15,7 @@ def clamp(n, minn, maxn):
 
 def variables(dims, clb):
     global lastImg, direction
-    lastImg = Image.new("RGB", dims)
+    lastImg = Image.new("RGBA", dims, (0, 0, 0, 0))
     direction = [1, 1]
 
 def changeDims(dims):
@@ -28,13 +28,15 @@ def callback(image):
         direction[0] / maths.sqrt(direction[0] ** 2 + direction[1] ** 2),
         direction[1] / maths.sqrt(direction[0] ** 2 + direction[1] ** 2)
     ]
-    lastImg = np.array(lastImg)
+    lastImg = np.array(lastImg).astype("int64")
+    lastImg -= np.array([0, 0, 0, 5])
+    lastImg = np.clip(lastImg, 0, 255).astype("uint8")
     lastImg = np.roll(lastImg, (
         int(direction[0] * 30),
         int(direction[1] * 30)
     ), axis = (0, 1))
     lastImg = Image.fromarray(lastImg)
-    open_cv_image = np.array(image) 
+    open_cv_image = np.array(image.convert("RGB")) 
     open_cv_image = open_cv_image[:, :, ::-1].copy()
     no_of_faces, faceCoors = fl.faces_locations(open_cv_image)
     try:

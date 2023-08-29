@@ -56,6 +56,9 @@ def changeDims(dims):
 
 def callback(image):
     global lastImg
-    img = choice(effects)(np.asarray(image), lastImg)
+    alpha = image.split()[3]
+    img = choice(effects)(np.array(image.convert("RGB")), lastImg)
     lastImg = img
-    return Image.fromarray(img)
+    img = Image.fromarray(img)
+    img.putalpha(alpha)
+    return img

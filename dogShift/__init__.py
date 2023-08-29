@@ -17,6 +17,8 @@ def changeDims(dims):
     image = image.resize(dims)
 
 def callback(img):
+    alpha = img.getchannel("A")
+    img = img.convert("RGB")
     global image, i, x, y
     img1 = np.array(img.filter(gauss1), dtype="int64")
     img2 = np.array(img.filter(gauss2), dtype="int64")
@@ -37,4 +39,5 @@ def callback(img):
         int((img.width - img3.width) / 2),
         int((img.height - img3.height) / 2)
     ))
+    image.putalpha(alpha)
     return image

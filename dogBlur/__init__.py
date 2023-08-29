@@ -6,7 +6,7 @@ gauss2 = ImageFilter.GaussianBlur(radius=4)
 
 def variables(dims, clb):
     global image
-    image = Image.new("RGBA", dims)
+    image = Image.new("RGBA", dims, (0, 0, 0, 0))
 
 def changeDims(dims):
     global image
@@ -22,6 +22,6 @@ def callback(img):
     img = Image.fromarray(img.astype("uint8"))
     img.putalpha(Image.fromarray(alpha.astype("uint8"), mode="L"))
     image.alpha_composite(img)
-    img = image.convert("RGB")
+    #img = image.convert("RGB")
     image = image.filter(gauss1)
     return img

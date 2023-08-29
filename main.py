@@ -8,7 +8,7 @@ print("pip install pykuwahara")
 print("pip install mido")
 print("pip install python-rtmidi")
 import json, tkinter
-import ascii, blurDart, rgbSwapper, mirrorEcho, colourOffset, imgFX, flipDiff, kaleidoscope, reciprocal, circle, maximum, oppDiff, pixSort, stretch, faceOnly, dissolve, kuwahara, palette, dogBlur, zoom, colourExpander, dogShift, camera, loadImg, diffThresh, pixelate, change, colourRemover, brightThresh, sine, feedback
+import ascii, blurDart, rgbSwapper, mirrorEcho, colourOffset, imgFX, flipDiff, kaleidoscope, reciprocal, circle, maximum, oppDiff, pixSort, stretch, faceOnly, dissolve, kuwahara, palette, dogBlur, zoom, colourExpander, dogShift, camera, loadImg, diffThresh, pixelate, change, colourRemover, brightThresh, sine, feedback, fadeBack, faceCentre
 from PIL import Image, ImageTk
 import mido, rtmidi
 
@@ -43,7 +43,9 @@ callbacks = {
     "colourRemover": colourRemover,
     "brightThresh": brightThresh,
     "sine": sine,
-    "feedback": feedback
+    "feedback": feedback,
+    "fadeBack": fadeBack,
+    "faceCentre": faceCentre
 }
 
 global currentCallback, clb
@@ -107,9 +109,8 @@ def callback(e):
                         continue
             image = Image.new("RGBA", dims)
             for cb in currentCallback:
-                newImage = callbacks[cb["name"]].callback(image.convert("RGB")).convert("RGBA")
-                newImage = Image.blend(transparent, newImage, cb["amount"])
-                image = Image.alpha_composite(image, newImage)
+                newImage = callbacks[cb["name"]].callback(image).convert("RGBA")
+                image = Image.blend(image, newImage, cb["amount"])
             winWidth = root.winfo_width()
             winHeight = root.winfo_height()
             if winWidth / dims[0] > winHeight / dims[1]:

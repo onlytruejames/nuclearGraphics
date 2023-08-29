@@ -7,7 +7,7 @@ global lastImg
 
 def variables(dims, clb):
     global lastImg
-    lastImg = Image.new("RGB", dims)
+    lastImg = Image.new("RGBA", dims)
 
 def changeDims(dims):
     global lastImg

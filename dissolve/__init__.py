@@ -3,12 +3,9 @@ import numpy as np
 import math as maths
 from random import choice, randint
 
-global lastImg
-lastImg = np.array(Image.new("RGB", (200, 200)))
-
 def variables(dims, clb):
     global lastImg
-    lastImg = np.array(Image.new("RGB", dims))
+    lastImg = np.array(Image.new("RGBA", dims))
 
 def changeDims(dims):
     global lastImg

@@ -63,6 +63,8 @@ def changeDims(dims):
     rings = newRings
 
 def callback(img):
+    alpha = img.getchannel("A")
+    img = img.convert("RGB")
     global lastImg, rings
     img = (choice(rings) * np.array(img))
     img = img.astype(np.uint16)
@@ -72,4 +74,5 @@ def callback(img):
     lastImg = resize(img, lastImg).resize(img.size)
     img = Image.blend(img, lastImg, 0.5)
     lastImg = img.rotate(randint(0, 360), fillcolor=(0, 0, 0, 0))
+    img.putalpha(alpha)
     return img

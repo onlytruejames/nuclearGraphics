@@ -24,7 +24,6 @@ def callback(image):
             img.seek(0)
             i = -1
         i += 1
-        return img.resize(image.size)
+        return Image.alpha_composite(image, img.resize(image.size).convert("RGBA"))
     except Exception as e:
-        print(e)
         return image
