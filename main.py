@@ -8,45 +8,17 @@ print("pip install pykuwahara")
 print("pip install mido")
 print("pip install python-rtmidi")
 import json, tkinter
-import ascii, blurDart, rgbSwapper, mirrorEcho, colourOffset, imgFX, flipDiff, kaleidoscope, reciprocal, circle, maximum, oppDiff, pixSort, stretch, faceOnly, dissolve, kuwahara, palette, dogBlur, zoom, colourExpander, dogShift, camera, loadImg, diffThresh, pixelate, change, colourRemover, brightThresh, sine, feedback, fadeBack, faceCentre
 from PIL import Image, ImageTk
 import mido, rtmidi
+import importlib
+import os
 
-callbacks = {
-    "ascii": ascii,
-    "blurDart": blurDart,
-    "RGBSwapper": rgbSwapper,
-    "mirrorEcho": mirrorEcho,
-    "colourOffset": colourOffset,
-    "imgFX": imgFX,
-    "flipDiff": flipDiff,
-    "kaleidoscope": kaleidoscope,
-    "reciprocal": reciprocal,
-    "circle": circle,
-    "maximum": maximum,
-    "oppDiff": oppDiff,
-    "pixSort": pixSort,
-    "stretch": stretch,
-    "faceOnly": faceOnly,
-    "dissolve": dissolve,
-    "kuwahara": kuwahara,
-    "palette": palette,
-    "dogBlur": dogBlur,
-    "zoom": zoom,
-    "colourExpander": colourExpander,
-    "dogShift": dogShift,
-    "camera": camera,
-    "loadImg": loadImg,
-    "diffThresh": diffThresh,
-    "pixelate": pixelate,
-    "change": change,
-    "colourRemover": colourRemover,
-    "brightThresh": brightThresh,
-    "sine": sine,
-    "feedback": feedback,
-    "fadeBack": fadeBack,
-    "faceCentre": faceCentre
-}
+callbacks = {}
+for module in os.listdir(os.path.dirname('effects/')):
+    try:
+        callbacks[module] = importlib.import_module("effects." + module)
+    except Exception as e:
+        print(e)
 
 global currentCallback, clb
 clb = -1
@@ -98,10 +70,9 @@ def callback(e):
             if msg.type == "note_on":
                 nextCallback(e)
         try:
-            newDims = (int(root.winfo_reqwidth() / 2), int(root.winfo_reqheight() / 2))
+            newDims = (int(root.winfo_reqwidth() / 3), int(root.winfo_reqheight() / 3))
             if not dims == newDims:
                 dims = newDims
-                transparent = Image.new("RGBA", newDims, (0, 0, 0, 0))
                 for cb in currentCallback:
                     try:
                         callbacks[cb["name"]].changeDims(newDims)
@@ -111,6 +82,7 @@ def callback(e):
             for cb in currentCallback:
                 newImage = callbacks[cb["name"]].callback(image).convert("RGBA")
                 image = Image.blend(image, newImage, cb["amount"])
+            image = Image.alpha_composite(Image.new("RGBA", dims, (0, 0, 0, 255)), image)
             winWidth = root.winfo_width()
             winHeight = root.winfo_height()
             if winWidth / dims[0] > winHeight / dims[1]:
@@ -175,4 +147,5 @@ label.pack()
 root.bind("<Right>", nextCallback)
 root.bind("<Left>", prevCallback)
 root.bind("<Return>", callback)
+root.configure(bg='black')
 root.mainloop()

@@ -10,8 +10,7 @@ palette = [
     (255, 255, 0)
 ]
 
-palettes = load(open("palette/set.json"))
-print(palettes)
+palettes = load(open("effects/palette/set.json"))
 
 val = 0
 

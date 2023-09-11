@@ -6,7 +6,7 @@ This is some live graphics software I made in tkinter. It started from trying to
 
 ## what does this thing do
 
-A blank image is passed through a bunch of filters/generators. The generators are `camera` and `loadImg` which just return a new image. The rest are effects. You can control how much an effect/generator affects the result, basically setting the alpha channel of the output to whatever. The output is alpha-composited over the input, or like putting a png image over a non-png image. This means you can layer the results. At the end it's all thrown in a tkinter window.
+A blank image is passed through a bunch of filters/generators. The generators are `camera` and `loadImg` which just return a new image. The rest are effects. You can control how much an effect/generator affects the result, basically setting the alpha channel of the output to whatever. At the end it's all thrown in a tkinter window.
 
 ### On each new frame
 
@@ -63,7 +63,7 @@ I think that just about does it
 "palette"
 "dogBlur"
 "zoom"
-"colourExpander"
+"saturate"
 "dogShift"
 "camera"
 "loadImg"

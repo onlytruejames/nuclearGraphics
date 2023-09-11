@@ -16,7 +16,6 @@ def variables(dims, clb):
 def changeDims(dims):
     global lastImg, transparent
     lastImg = lastImg.resize(dims)
-    print(dims)
     transparent = transparent.resize(dims)
 
 def callback(image):

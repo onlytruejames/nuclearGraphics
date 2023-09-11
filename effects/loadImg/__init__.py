@@ -2,11 +2,11 @@ from PIL import Image
 import json
 
 global imgs
-imgs = json.load(open("loadImg/imgs.json", "r"))
+imgs = json.load(open("effects/loadImg/imgs.json", "r"))
 newImgs = {}
 for im in imgs:
     im = list(im.items())[0]
-    newImgs[im[0]] = Image.open(f'loadImg/{im[1]}')
+    newImgs[im[0]] = Image.open(f'effects/loadImg/{im[1]}')
 imgs = newImgs
 
 def variables(dims, calb):
