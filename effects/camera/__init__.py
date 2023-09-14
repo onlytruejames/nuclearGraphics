@@ -2,20 +2,16 @@ from cv2 import VideoCapture, cvtColor, COLOR_BGR2RGB
 from PIL import Image
 
 #stolen from stackoverflow
-nonWorkingPorts = []
-devPort = 0
+index = 0
 ports = []
-while not len(nonWorkingPorts):
-    camera = VideoCapture(devPort)
-    if camera.isOpened():
-        isReading, img = camera.read()
-        if isReading:
-            ports.append(devPort)
-        else:
-            nonWorkingPorts.append(devPort)
-    else:
-        nonWorkingPorts.append(devPort)
-    devPort +=1
+i = 10
+while i > 0:
+    cap = VideoCapture(index)
+    if cap.read()[0]:
+        ports.append(index)
+        cap.release()
+    index += 1
+    i -= 1
 
 if len(ports) == 0:
     print("No camera ports are available, try plugging in a camera and try again")
