@@ -21,6 +21,7 @@ for module in os.listdir(os.path.dirname('effects/')):
         print(e)
 
 global currentCallback, clb
+currentCallback = []
 clb = -1
 
 set = json.load(open("set.json", "r"))
@@ -75,9 +76,13 @@ def callback(e):
                 dims = newDims
                 for cb in currentCallback:
                     try:
-                        callbacks[cb["name"]].changeDims(newDims)
-                    except:
-                        continue
+                        try:
+                            changeDims = callbacks[cb["name"]].changeDims
+                        except:
+                            continue
+                        changeDims(newDims)
+                    except Exception as ex:
+                        print(ex)
             image = Image.new("RGBA", dims)
             for cb in currentCallback:
                 newImage = callbacks[cb["name"]].callback(image).convert("RGBA")
@@ -102,16 +107,22 @@ def callback(e):
             raise e
 
 def changeCallback():
-    global currentCallback, clb, root, dims
+    global currentCallback, clb, root, dims, prevCallback
+    prevCallback = currentCallback
     currentCallback = sequence[clb]
     #modes = currentCallback['names']
     #for mode in modes:
     #    variables[mode] = callbacks[mode].variables(cam, clb)
     for cb in currentCallback:
         try:
-            callbacks[cb["name"]].variables(dims, clb)
+            changeVars = cb["changeVars"]
         except:
-            continue
+            changeVars = False
+        if not cb in prevCallback and not changeVars:
+            try:
+                callbacks[cb["name"]].variables(dims, clb)
+            except:
+                continue
         try:
             callbacks[cb["name"]].changeDims(dims)
         except:

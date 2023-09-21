@@ -173,7 +173,8 @@
                 "amount": 1
             }, {
                 "name": "faceOnly",
-                "amount": 1
+                "amount": 1,
+                "changeVars": false
             }, {
                 "name": "imgFX",
                 "amount": 1
@@ -187,7 +188,8 @@
                 "amount": 1
             }, {
                 "name": "faceOnly",
-                "amount": 1
+                "amount": 1,
+                "changeVars": false
             }, {
                 "name": "dissolve",
                 "amount": 1
@@ -391,7 +393,8 @@
                 "amount": 1
             }, {
                 "name": "fadeBack",
-                "amount": 1
+                "amount": 1,
+                "changeVars": false
             }
         ], [
             {
@@ -405,7 +408,8 @@
                 "amount": 1
             }, {
                 "name": "fadeBack",
-                "amount": 1
+                "amount": 1,
+                "changeVars": false
             }
         ], [
             {
@@ -463,6 +467,38 @@
                 "amount": 1
             }, {
                 "name": "remain",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "brightShadow",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "diffOffset",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "avgGauss",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "vectorPush",
                 "amount": 1
             }
         ]
