@@ -1,23 +1,19 @@
 from PIL import Image
-import json
 
 global imgs
-imgs = json.load(open("effects/loadImg/imgs.json", "r"))
-newImgs = {}
-for im in imgs:
-    im = list(im.items())[0]
-    newImgs[im[0]] = Image.open(f'effects/loadImg/{im[1]}')
-imgs = newImgs
+imgs = {}
 
 def variables(dims, calb):
     global i, clb
     clb = str(calb)
     i = 0
 
-def callback(image):
+def callback(image, variables):
     global clb, i, imgs
+    if not variables["src"] in imgs:
+        imgs[variables["src"]] = Image.open(f'effects/loadImg/{variables["src"]}')
+    img = imgs[variables["src"]]
     try:
-        img = imgs[clb]
         try:
             img.seek(i)
         except:

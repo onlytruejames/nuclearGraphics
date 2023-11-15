@@ -85,7 +85,10 @@ def callback(e):
                         print(ex)
             image = Image.new("RGBA", dims)
             for cb in currentCallback:
-                newImage = callbacks[cb["name"]].callback(image).convert("RGBA")
+                try:
+                    newImage = callbacks[cb["name"]].callback(image, cb["variables"]).convert("RGBA")
+                except:
+                    newImage = callbacks[cb["name"]].callback(image).convert("RGBA")
                 image = Image.blend(image, newImage, cb["amount"])
             image = Image.alpha_composite(Image.new("RGBA", dims, (0, 0, 0, 255)), image)
             winWidth = root.winfo_width()
@@ -109,6 +112,7 @@ def callback(e):
 def changeCallback():
     global currentCallback, clb, root, dims, prevCallback
     prevCallback = currentCallback
+    names = [m["name"] for m in prevCallback]
     currentCallback = sequence[clb]
     #modes = currentCallback['names']
     #for mode in modes:
@@ -117,8 +121,8 @@ def changeCallback():
         try:
             changeVars = cb["changeVars"]
         except:
-            changeVars = False
-        if not cb in prevCallback and not changeVars:
+            changeVars = True
+        if (changeVars and cb["name"] in names) or (not cb["name"] in names):
             try:
                 callbacks[cb["name"]].variables(dims, clb)
             except:

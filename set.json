@@ -217,7 +217,12 @@
                 "amount": 1
             }, {
                 "name": "palette",
-                "amount": 1
+                "amount": 1,
+                "variables": [
+                    [0, 0, 255],
+                    [255, 0, 255],
+                    [0, 255, 255]
+                ]
             }
         ], [
             {
@@ -278,12 +283,18 @@
         ], [
             {
                 "name": "loadImg",
-                "amount": 1
+                "amount": 1,
+                "variables": {
+                    "src": "thom.gif"
+                }
             }
         ], [
             {
                 "name": "loadImg",
-                "amount": 1
+                "amount": 1,
+                "variables": {
+                    "src": "Blizzards.jpg"
+                }
             }
         ], [
             {
@@ -328,7 +339,10 @@
                 "amount": 1
             }, {
                 "name": "loadImg",
-                "amount": 1
+                "amount": 1,
+                "variables": {
+                    "src": "sosw.png"
+                }
             }
         ], [
             {
@@ -348,7 +362,10 @@
                 "amount": 1
             }, {
                 "name": "loadImg",
-                "amount": 1
+                "amount": 1,
+                "variables": {
+                    "src": "soy.png"
+                }
             }
         ], [
             {
@@ -439,7 +456,10 @@
         ], [
             {
                 "name": "loadImg",
-                "amount": 1
+                "amount": 1,
+                "variables": {
+                    "src": "sosw.png"
+                }
             }, {
                 "name": "fadeBack",
                 "amount": 1
@@ -499,6 +519,39 @@
                 "amount": 1
             }, {
                 "name": "vectorPush",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "faceOnly",
+                "amount": 1
+            }, {
+                "name": "vectorPush",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "faceOnly",
+                "amount": 1
+            }, {
+                "name": "fadeToAndFro",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "saturate",
+                "amount": 1
+            }, {
+                "name": "coloursExpanding",
                 "amount": 1
             }
         ]
