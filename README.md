@@ -74,6 +74,8 @@ I think that just about does it
 "brightThresh"
 "sine"
 "feedback"
+"colourWheel"
+"backgroundRemoval"
 ```
 5. Done!
 
@@ -81,14 +83,14 @@ Also some of the effects have their own `set.json`s, but the documentation shoul
 
 ## Adding custom effects
 
-1. Add the folder name to the imports at the very top of `main.py`
-2. In `callbacks` in `main.py`, add `"[effect name]": [folder name]`
+1. Add the effect as a folder into the `effects` directory
+2. List the folder name in `set.json`
 3. Done!
 
 ## Creating your own effect
 
-1. Create a folder called `live[effect name]`
-2. Add `__init__.py`
+1. Create a folder named the effect name. 
+2. Add `__init__.py`.
 3. In `__init__.py`, add the following code:
 ```python
 from PIL import Image
@@ -103,6 +105,5 @@ def callback(img):
     #do whatever to img which is a PIL image
 
 ```
-
-4. Add the effect as outlined in the previous section.
-5. Done!
+`changeDims` is optional, I think `variables` is but I can't remember.
+4. Done!
