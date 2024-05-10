@@ -554,6 +554,42 @@
                 "name": "coloursExpanding",
                 "amount": 1
             }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "noseRemover",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "backgroundRemoval",
+                "amount": 1
+            }, {
+                "name": "saturate",
+                "amount": 1
+            }, {
+                "name": "colourWheel",
+                "amount": 1
+            }, {
+                "name": "faceOnly",
+                "amount": 1
+            }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "backgroundRemoval",
+                "amount": 1
+            }, {
+                "name": "fadeBack",
+                "amount": 1
+            }
         ]
     ]
 }
