@@ -590,6 +590,17 @@
                 "name": "fadeBack",
                 "amount": 1
             }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "diffLimit",
+                "amount": 1
+            }, {
+                "name": "dissolve",
+                "amount": 1
+            }
         ]
     ]
 }

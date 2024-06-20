@@ -42,40 +42,52 @@ I think that just about does it
 }
 ```
 `name` determines what effect is used. `amount` is a float which determines how much of the effect you want. To convert to a RGBA Alpha value, multiply by 255.
-3. Copy this over and over again in the list with different effects. The included effects are below, but you can use more if you add them. Effects can also be stacked and are executed in the order they appear in the `names` list.
+3. Copy this over and over again in the list with different effects. The included effects are below, but you can use more if you add them. Effects can also be stacked and are executed in the order they appear in the `names` list. Note that the below effects get less pointless as you go further down the list, due to the ones at the beginning being made first.
 
 ```json
-"ascii"
-"blurDart"
-"circle"
-"colourOffset"
-"flipDiff"
-"imgFX"
-"kaleidoscope"
-"maximum"
-"mirrorEcho"
-"oppDiff"
-"pixSort"
-"reciprocal"
-"RGBSwapper"
-"stretch"
-"kuwahara"
-"palette"
-"dogBlur"
-"zoom"
-"saturate"
-"dogShift"
-"camera"
-"loadImg"
-"diffThresh"
-"pixelate"
-"change"
-"colourRemover"
-"brightThresh"
-"sine"
-"feedback"
-"colourWheel"
-"backgroundRemoval"
+"ascii" - Turns an image into ASCII text
+"blurDart" - Flashes the frame over itself weirdly
+"circle" - Puts a circle overlay over the image. Weird effect
+"colourOffset" - The R, G, B channels move around independently
+"flipDiff" - Flips image, finds difference, I think
+"imgFX" - A bunch of PIL's image effects making a trippy effect
+"kaleidoscope" - Slightly terrible kaleidoscope imitator, can look alright
+"maximum" - Chooses whether to pick the brightest pixels from two frames or the darkest
+"mirrorEcho" - Something something feedback and flipping the image
+"oppDiff" - Something something flipping the image and working out the difference
+"pixSort" - Sorts the image according to some weird perlin noise mapping
+"reciprocal" - Performs a reciprocal function over the entire image.
+"RGBSwapper" - Swaps RGB channels
+"stretch" - Extends a line of pixels perpendicular to itself. Aphex Twin uses a similar effect a lot
+"kuwahara" - Applies the Kuwahara filter using a library
+"palette" - Applies a colour pallette to the image
+"dogBlur" - Applies difference of Gaussians and selects only the edges of objects
+"zoom" - Feedback effect, centred
+"saturate" - Saturates the frame
+"dogShift" - Uses difference of Gaussians but shifts the DOG map, I can't remember what it does
+"camera" - Returns your camera
+"loadImg" - Returns whatever image you load
+"diffThresh" - Changes pixels only if they change significantly
+"pixelate" - Pixelates the image
+"change" - Returns the difference between two frames
+"colourRemover" - Picks a colour and sets it to completely transparent
+"brightThresh" - Cycles through brightnesses and set them completely transparent
+"sine" - Trippy
+"feedback" - Like when you point a camera at a screen showing its output
+"colourWheel" - Changes image hue
+"backgroundRemoval" - Removes background
+"diffLimit" - Limits the difference between two frames
+"coloursExpanding" - A bit like when rain hits still water, but with right angles
+"avgGauss" - Pointless average of two blurs
+"brightShadow" - Bright bits of the image leave a trace for a short distance
+"dissolve" - A blur, which is pixelated for some reason
+"faceCentre" - Finds a face and centres the image around it
+"faceOnly" - Finds a face and makes it fly around the image
+"faceReplacer" - Replaces different faces in the image
+"fadeBack" - Pastes previous frame behind the current frame but slightly smaller. Allows for 3d-ish feedback. Aphex Twin had something similar
+"fadeToAndFro" - This but the image can also be slightly bigger
+"noseRemover" - Removes noses by cutting out strips of the image
+"vectorPush" - Very slow effect that makes it look like an image is going round a corner sometimes.
 ```
 5. Done!
 
