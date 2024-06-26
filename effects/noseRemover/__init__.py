@@ -1,10 +1,19 @@
 from PIL import Image
-from face_lib import face_lib
-import random
 import numpy as np
-import math as maths
+import cv2
 
-fl = face_lib()
+face_classifier = cv2.CascadeClassifier(
+    cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+)
+
+def findFaces(img):
+    img = np.array(img.convert("RGB"))[:, :, ::-1].copy()
+    gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    faces = face_classifier.detectMultiScale(
+        gray_image, scaleFactor=1.4, minNeighbors=1, minSize=(1, 1)
+    )
+    return faces
+
 
 def poprow(my_array,pr):
     """ row popping in numpy arrays
@@ -17,11 +26,9 @@ def poprow(my_array,pr):
 
 def callback(image):
     shape = image.size
-    open_cv_image = np.array(image.convert("RGB")) 
-    open_cv_image = open_cv_image[:, :, ::-1].copy()
-    no_of_faces, noses = fl.faces_locations(open_cv_image)
-    if no_of_faces:
-        noses = [[nose[1] + 0.3 * nose[3], nose[1] + 0.65 * nose[3]] for nose in noses]
+    noses = findFaces(image)
+    if len(noses) > 0:
+        noses = [[nose[1] + 0.45 * nose[3], nose[1] + 0.65 * nose[3]] for nose in noses]
         image = np.array(image)
         gone = []
         for nose in noses:

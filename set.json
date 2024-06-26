@@ -601,6 +601,14 @@
                 "name": "dissolve",
                 "amount": 1
             }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "noseRemover",
+                "amount": 1
+            }
         ]
     ]
 }

@@ -1,10 +1,28 @@
 from PIL import Image
-from face_lib import face_lib
 import random
 import numpy as np
 import math as maths
+import cv2
 
-fl = face_lib()
+face_classifier = cv2.CascadeClassifier(
+    cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+)
+
+def findFaces(img):
+    img = np.array(img.convert("RGB"))[:, :, ::-1].copy()
+    gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    faces = face_classifier.detectMultiScale(
+        gray_image, scaleFactor=1.4, minNeighbors=1, minSize=(1, 1)
+    )
+    return faces
+
+def cropFace(img, face):
+    return img.crop((
+        face[0],
+        face[1],
+        face[2] + face[0],
+        face[3] + face[1]
+    ))
 
 global lastImg, direction
 lastImg = Image.new("RGB", (200, 200))
@@ -36,21 +54,20 @@ def callback(image):
         int(direction[1] * 30)
     ), axis = (0, 1))
     lastImg = Image.fromarray(lastImg)
-    open_cv_image = np.array(image.convert("RGB")) 
-    open_cv_image = open_cv_image[:, :, ::-1].copy()
-    no_of_faces, faceCoors = fl.faces_locations(open_cv_image)
+    faces = findFaces(image)
     try:
-        num = random.randint(0, no_of_faces - 1)
-        face = Image.fromarray(fl.get_faces(open_cv_image)[num])
+        num = random.randint(0, len(faces))
+        face = faces[num]
+        faceImg = cropFace(image, face)
         direction = [
-            -(((faceCoors[num][1] * 2 + faceCoors[num][3]) - image.height) / 2) / image.height,
-            (((faceCoors[num][0] * 2 + faceCoors[num][2]) - image.width) / 2) / image.width
+            -(((face[1] * 2 + face[3]) - image.height) / 2) / image.height,
+            (((face[0] * 2 + face[2]) - image.width) / 2) / image.width
         ]
-        lastImg.paste(face, (
-            int((lastImg.width / 2) - (face.width / 2)),
-            int((lastImg.height / 2) - (face.height / 2)),
-            int((lastImg.width / 2) + (face.width / 2)),
-            int((lastImg.height / 2) + (face.height / 2)) 
+        lastImg.paste(faceImg, (
+            int((lastImg.width / 2) - (faceImg.width / 2)),
+            int((lastImg.height / 2) - (faceImg.height / 2)),
+            int((lastImg.width / 2) + (faceImg.width / 2)),
+            int((lastImg.height / 2) + (faceImg.height / 2)) 
         ))
     except Exception as e:
         pass

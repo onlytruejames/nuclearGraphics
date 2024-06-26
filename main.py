@@ -3,7 +3,6 @@ print("sudo apt install python3-tk (if on Linux, for mac or pc look up how to in
 print("pip install opencv-python")
 print("pip install PIL")
 print("pip install scikit-image")
-print("pip install face-library")
 print("pip install pykuwahara")
 print("pip install mido")
 print("pip install python-rtmidi")

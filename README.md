@@ -83,7 +83,6 @@ I think that just about does it
 "dissolve" - A blur, which is pixelated for some reason
 "faceCentre" - Finds a face and centres the image around it
 "faceOnly" - Finds a face and makes it fly around the image
-"faceReplacer" - Replaces different faces in the image
 "fadeBack" - Pastes previous frame behind the current frame but slightly smaller. Allows for 3d-ish feedback. Aphex Twin had something similar
 "fadeToAndFro" - This but the image can also be slightly bigger
 "noseRemover" - Removes noses by cutting out strips of the image
