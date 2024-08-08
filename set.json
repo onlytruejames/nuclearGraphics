@@ -614,6 +614,9 @@
                 "name": "camera",
                 "amount": 1
             }, {
+                "name": "kuwahara",
+                "amount": 1
+            }, {
                 "name": "dogBlur",
                 "amount": 1
             }, {
