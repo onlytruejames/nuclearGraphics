@@ -609,6 +609,17 @@
                 "name": "noseRemover",
                 "amount": 1
             }
+        ], [
+            {
+                "name": "camera",
+                "amount": 1
+            }, {
+                "name": "dogBlur",
+                "amount": 1
+            }, {
+                "name": "edgeStretch",
+                "amount": 1
+            }
         ]
     ]
 }
